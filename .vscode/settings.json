@@ -1,0 +1,9 @@
+{
+  "highlight-matching-tag.styles": {
+    "opening": {
+      "name": {
+        "underline": "purple"
+      }
+    }
+  }
+}
