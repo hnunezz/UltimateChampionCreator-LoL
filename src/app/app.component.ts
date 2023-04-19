@@ -9,13 +9,10 @@ import { Champions } from './shared/models/champions.models';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'PerfectChamp-LoL';
+  title = 'Welcolme to Perfect Champ';
 
-  champions: Champions[];
-
-  constructor(private championsService: ChampionsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.champions = this.championsService.getChampions();
   }
 }

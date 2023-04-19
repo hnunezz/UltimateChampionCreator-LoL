@@ -1,0 +1,34 @@
+section {
+  div#outside-border-button {
+    > div {
+      background: transparent;
+      display: inline-block;
+      text-decoration: none;
+      position: absolute;
+      top: -4px;
+      left: -6px;
+      width: 256px;
+      height: 70px;
+      border: 1px solid white;
+      clip-path: polygon(18% 0, 100% 0, 100% 75%, 82% 100%, 0 100%, 0% 25%);
+
+      &.diagonal-top {
+        top: -4px;
+        left: -6px;
+        width: 256px;
+        height: 72px;
+        background: #fffffff5;
+        clip-path: polygon(17% 0, 18% 0, 0 26%, 0 24%);
+      }
+
+      &.diagonal-bottom {
+        top: -4px;
+        left: -6px;
+        width: 256px;
+        height: 72px;
+        background: #fffffff5;
+        clip-path: polygon(100% 73%, 100% 75%, 82% 97%, 81% 97%);
+      }
+    }
+  }
+}

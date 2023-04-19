@@ -1,0 +1,26 @@
+section {
+  position: relative;
+
+  button {
+    outline: none;
+    background: #0bc6e3;
+    width: 246px;
+    height: 64px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    font-family: "Caudex";
+    border: 1px solid #0bc6e3;
+    padding: 0 !important;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    button {
+      transition: ease 0.3s;
+      background-color: transparent;
+      color: #0bc6e3;
+    }
+  }
+}
