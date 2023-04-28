@@ -1,4 +1,5 @@
-<section>
+<section [class]="'btn ' + styleClass">
+
   <!--? Clip-Path To Outside Button Border-->
   <div id="outside-border-button">
     <div class="diagonal-top"></div>
@@ -7,5 +8,5 @@
   </div>
   <!--? Clip-Path To Outside Button Border-->
 
-  <button>TROCAR CAMPEÃO</button>
+  <button>{{ label }}</button>
 </section>

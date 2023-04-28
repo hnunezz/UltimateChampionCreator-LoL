@@ -1,5 +1,69 @@
-section {
+section.btn {
+  position: relative;
+
+  button {
+    outline: none;
+    width: 246px;
+    height: 64px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    font-family: "Caudex";
+    padding: 0 !important;
+    color: black;
+
+    &:hover {
+      cursor: pointer;
+
+      button {
+        transition: ease 0.3s;
+      }
+    }
+  }
+
+  &.btn-primary {
+    div#outside-border-button {
+      display: block;
+    }
+
+    button {
+      background: #0bc6e3;
+      border: 1px solid #0bc6e3;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      button {
+        background-color: transparent;
+        color: #0bc6e3;
+        transition: ease 0.3s;
+      }
+    }
+  }
+
+  &.btn-secondary {
+    button {
+      width: 136px;
+      height: 41px;
+      background: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      button {
+        background-color: transparent;
+        color: white;
+        transition: ease 0.3s;
+      }
+    }
+  }
+
   div#outside-border-button {
+    display: none;
+
     > div {
       background: transparent;
       display: inline-block;

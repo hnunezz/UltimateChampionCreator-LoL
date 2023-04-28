@@ -1,14 +1,68 @@
-
-<div>
+<div onselectstart="return false">
   <main>
     <figure>
-      <img src="https://files.tecnoblog.net/wp-content/uploads/2019/07/yi-header.jpg"/>
+      <img src="../../../assets/images/champions/splash/MasterYi_0.jpg" />
 
       <label>
         <span> O ESPADACHIM WUJU </span>
         <span> MASTER YI </span>
-        <app-button></app-button>
+
+        <app-button styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
       </label>
     </figure>
+
+    <section>
+      <div class="champion-spell-content">
+        <div class="champion-spell-content_{{passiveSpellsItem.label}}" [ngClass]="{'active': passiveSpellsItem.active}"
+          (click)="selectSpell(passiveSpellsItem)">
+
+          <img [src]="'../../../assets/images/spells/p/'+passiveSpellsItem.image">
+
+          <strong>{{ passiveSpellsItem.label }}</strong>
+        </div>
+
+        <hr>
+
+        <div class="spell-keys">
+          <ng-container *ngFor="let spell of spellsItem">
+            <div class="champion-spell-content_{{spell.label}}" [ngClass]="{'active': spell.active}"
+              (click)="selectSpell(spell)">
+
+              <strong>{{ spell.label }}</strong>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="champion-spell-list">
+        <!-- <ng-container *ngIf="listGeneralSpells.length != 0"> -->
+          <input type="text" [(ngModel)]="searchChampionInput" (ngModelChange)="filterSpell()" placeholder="Pesquise a habilidade ou campeão">
+
+          <div class="spell-main">
+
+            <ng-container *ngFor="let details of listGeneralSpells; let i = index">
+              <section
+                class="champion-spell-details"
+                [ngClass]="{'active': details.selected}"
+                (click)="selectHability(details, i)"
+              >
+                <figure>
+                  <img [src]="'../../../assets/images/spells/'+ details.type+'/'+details.image">
+                </figure>
+
+                <div class="details">
+                  <label>
+                    <span class="champion-name"> {{details.champion}} </span>
+                    <span class="spell-name"> {{details.title}} </span>
+                  </label>
+
+                  <span class="spell-description">{{details.description}}</span>
+                </div>
+              </section>
+            </ng-container>
+          </div>
+        <!-- </ng-container> -->
+      </div>
+    </section>
   </main>
 </div>

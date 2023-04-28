@@ -1,7 +1,7 @@
 import { ChampionsService } from './shared/services/champions.service';
 import { Component, OnInit } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { Champions } from './shared/models/champions.models';
+import { Champions } from './shared/models/champions';
 
 @Component({
   selector: 'app-root',

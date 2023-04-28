@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CreateChampionRoutingModule } from './create-champion-routing.module';
 import { CreateChampionComponent } from './create-champion.component';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ButtonModule } from 'src/app/shared/components/button/button.module';
   imports: [
     CommonModule,
     CreateChampionRoutingModule,
-    ButtonModule
+    ButtonModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
