@@ -32,9 +32,7 @@ export class CreateChampionComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    if (!this.hasChampions) {
-      this.champions = await this.championsService.getChampions();
-    }
+    if (!this.hasChampions) { this.champions = await this.championsService.getChampions(); }
 
     this.setSpellsSelections()
   }
@@ -58,26 +56,13 @@ export class CreateChampionComponent implements OnInit {
     anotherSpells.forEach((x: any) => x.active = false)
     this.spellsSelectionsItems[spellActive].active = true;
 
-    this.setSpellList(spellActive);
-  }
-
-  private setSpellList(spellSelect: number): void {
     if (!this.hasPassives) {
       this.spells = this.championsService.getChampionsSpells();
     }
 
-    this.listGeneralSpells = this.spells[spellSelect];
-    console.log(this.spells)
-    console.log(this.listGeneralSpells)
-    // switch (spellSelect) {
-    //   case 0:
-
-    //     // if (spellSelect.active) {
-    //     // }
-
-    //     break;
-    // }
+    this.listGeneralSpells = this.spells[spellActive];
   }
+
 
   public filterSpell(): void {
     // if (this.searchChampionInput == '') {
@@ -90,11 +75,7 @@ export class CreateChampionComponent implements OnInit {
     // }
   }
 
-  public selectHability(hability: SpellSelect, index: number): void {
-    // this.listGeneralSpells.forEach(spell => spell.selected = false);
-    // this.listGeneralSpells[index].selected = !this.listGeneralSpells[index].selected;
-
-    // this.passiveSpellsItem.image = hability.image;
-
+  public selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect): void {
+    allSpells.forEach((element: SpellSelect) => element.selected = (element === spellSelected))
   }
 }

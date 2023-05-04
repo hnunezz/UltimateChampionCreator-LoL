@@ -46,23 +46,23 @@
 
           <div class="spell-main">
 
-            <ng-container *ngFor="let details of listGeneralSpells.spells; let i = index">
+            <ng-container *ngFor="let spell of listGeneralSpells.spells; let i = index">
               <section
                 class="champion-spell-details"
-                [ngClass]="{'active': details.selected}"
-                (click)="selectHability(details, i)"
+                [ngClass]="{'active': spell.selected}"
+                (click)="selectHability(listGeneralSpells.spells, spell)"
               >
                 <figure>
-                  <img [src]="'../../../assets/images/spells/'+details.image">
+                  <img [src]="'../../../assets/images/spells/'+spell.image">
                 </figure>
 
                 <div class="details">
                   <label>
-                    <span class="champion-name"> {{details.champion}} </span>
-                    <span class="spell-name"> {{details.title}} </span>
+                    <span class="champion-name"> {{spell.champion}} </span>
+                    <span class="spell-name"> {{spell.title}} </span>
                   </label>
 
-                  <span class="spell-description">{{details.description}}</span>
+                  <span class="spell-description">{{spell.description}}</span>
                 </div>
               </section>
             </ng-container>
