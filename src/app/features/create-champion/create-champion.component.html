@@ -13,23 +13,29 @@
 
     <section>
       <div class="champion-spell-content">
-        <div class="champion-spell-content_{{passiveSpellsItem.label}}" [ngClass]="{'active': passiveSpellsItem.active}"
-          (click)="selectSpell(passiveSpellsItem)">
+        <div
+          class="champion-spell-content_{{spellsSelectionsItems[0].label}}"
+          [ngClass]="{'active': spellsSelectionsItems[0].active}"
+          (click)="selectSpell(spellsSelectionsItems[0].key)">
 
-          <img [src]="'../../../assets/images/spells/p/'+passiveSpellsItem.image">
+          <!-- <img [src]="'../../../assets/images/spells/{{spellsSelectionsItems[0].label.toLowerCase()}}/'+ passiveSpellsItem.image"> -->
 
-          <strong>{{ passiveSpellsItem.label }}</strong>
+          <strong>{{ spellsSelectionsItems[0].label }}</strong>
         </div>
 
         <hr>
 
         <div class="spell-keys">
-          <ng-container *ngFor="let spell of spellsItem">
-            <div class="champion-spell-content_{{spell.label}}" [ngClass]="{'active': spell.active}"
-              (click)="selectSpell(spell)">
+          <ng-container *ngFor="let spell of spellsSelectionsItems; let i = index">
+            <ng-container *ngIf="i > 0">
+              <div
+                class="champion-spell-content_{{spell.label}}"
+                [ngClass]="{'active': spell.active}"
+                (click)="selectSpell(spell.key)">
 
-              <strong>{{ spell.label }}</strong>
-            </div>
+                <strong>{{ spell.label }}</strong>
+              </div>
+            </ng-container>
           </ng-container>
         </div>
       </div>
@@ -40,14 +46,14 @@
 
           <div class="spell-main">
 
-            <ng-container *ngFor="let details of listGeneralSpells; let i = index">
+            <ng-container *ngFor="let details of listGeneralSpells.spells; let i = index">
               <section
                 class="champion-spell-details"
                 [ngClass]="{'active': details.selected}"
                 (click)="selectHability(details, i)"
               >
                 <figure>
-                  <img [src]="'../../../assets/images/spells/'+ details.type+'/'+details.image">
+                  <img [src]="'../../../assets/images/spells/'+details.image">
                 </figure>
 
                 <div class="details">

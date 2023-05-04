@@ -3,7 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Champions } from '../models/champions';
 import { Observable, from, lastValueFrom, map } from 'rxjs';
 import { ResponseModel } from '../models/response-model.models';
-import { PassiveSelect } from '../models/passive-select';
+import { SpellList, SpellSelect } from '../models/spell-select';
+import { getSpellsList } from '../enums/spells';
 
 @Injectable({
   providedIn: 'root'
@@ -41,30 +42,37 @@ export class ChampionsService {
     return this._champions;
   }
 
-  public getChampionsPassives(): Array<PassiveSelect> {
-    return this._champions.map(champ => {
-      return {
-        champion: champ.id,
-        description: champ.passive.description,
-        image: champ.passive.image.full,
-        title: champ.passive.name,
-        selected: false,
-        type: 'p'
-      }
-    })
+
+  public getChampionsSpells(): SpellList[] {
+    const cacheKey = "championsSpells";
+    const cachedSpells = localStorage.getItem(cacheKey);
+
+    if (cachedSpells) { return JSON.parse(cachedSpells); }
+
+    const spellsList = getSpellsList();
+    const result: SpellList[] = [];
+
+    for (let i = 0; i < spellsList.length; i++) {
+      const [type, typeLabel] = spellsList[i];
+      const spells: SpellSelect[] = [];
+
+      this._champions.forEach((champ) => {
+        const spellIndex = type - 1;
+        const spell = spellIndex === -1 ? champ.passive : champ.spells[spellIndex];
+
+        spells.push({
+          champion: champ.name,
+          description: spell.description,
+          title: spell.name,
+          image: spell.image.full,
+          selected: false,
+        });
+      });
+
+      result.push({ type, typeLabel, spells });
+    }
+
+    localStorage.setItem(cacheKey, JSON.stringify(result));
+    return result;
   }
-
-  // async getChampionSelec(): Promise<Champions[]> {
-
-  //   return this._champions;
-  // }
-
-  // const response = await this.requestService.get(`${APIS.CEDENTE}${APIS.GET_COMMON}${APIS.CNPJCNPF}/${APIS.GESTORA}`,
-  //   new HttpParams().append('cnpjcpf', this.cnpjValue).append('fidcid', this.fidcModelValue));
-
-  // const data = response.model as Assignor;
-
-  // getChampionsDetails(name: string): Observable<any> {
-  //   return this.http.get(`${this._urlChampionsDetails}${name}.json`) as Observable<any>;
-  // }
 }
