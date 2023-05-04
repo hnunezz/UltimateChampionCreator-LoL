@@ -33,17 +33,3 @@ export function getSpellsList(): Array<[number, string]> {
 
   return result;
 }
-// export function getSpellsList(): Array<spellListModel> {
-//   let result: Array<spellListModel> = [];
-
-//   Object.values(Spells).filter(element => typeof element === 'number')
-//     .map(enumKey => {
-//       result.push({
-//         key: enumKey as number,
-//         label: spellToLabel.get(enumKey as Spells) as string,
-//         active: false
-//       });
-//     });
-
-//   return result;
-// }

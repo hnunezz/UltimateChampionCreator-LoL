@@ -9,7 +9,7 @@ import { getSpellsList } from '../enums/spells';
 @Injectable({
   providedIn: 'root'
 })
-export class ChampionsService {
+export class ChampionsService implements OnInit {
 
   private _champions: Champions[] = [];
   private _url = '../../../assets/data/champions-full.json';
@@ -17,7 +17,13 @@ export class ChampionsService {
   // private _urlChampionsDetails = 'https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/'; //? {champ}.json
   // private _urlChampionsIMG = 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/';
 
+  public get hasChampions(): boolean { return this._champions.length > 0; }
+
   constructor(private http: HttpClient) { }
+
+  async ngOnInit(): Promise<void> {
+    if (!this.hasChampions) { this._champions = await this.getChampions(); }
+  }
 
   async getChampions(): Promise<Champions[]> {
     this._champions = [];
