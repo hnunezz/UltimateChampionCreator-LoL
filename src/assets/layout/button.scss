@@ -11,6 +11,7 @@ section.btn {
     font-family: "Caudex";
     padding: 0 !important;
     color: black;
+    transition: ease-out 0.3s;
 
     &:hover {
       cursor: pointer;

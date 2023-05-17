@@ -14,4 +14,14 @@ export class Champions {
   partype: string;
   spells: Array<SpellModel>;
   passive: SpellModel;
+
+  constructor(instanceData?: Champions) {
+    if (instanceData) {
+      this.deserealize(instanceData);
+    }
+  }
+
+  public deserealize(instanceData: Champions): Champions {
+    return Object.assign(this, instanceData);
+  }
 }

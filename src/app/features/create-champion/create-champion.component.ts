@@ -5,6 +5,8 @@ import { lastValueFrom } from 'rxjs';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
+import { CacheService } from 'src/app/shared/services/cache-service.service';
+import { ResponseModel } from 'src/app/shared/models/response-model.models';
 
 @Component({
   selector: 'app-create-champion',
@@ -13,40 +15,55 @@ import { ChampionSelect } from 'src/app/shared/models/champion-select';
 })
 export class CreateChampionComponent implements OnInit {
 
-  public championsSelectResult: ChampionSelect //*SELECTED ITEMS
-  public searchChampionInput: string = ''; //*Input
-
-  public spells: Array<SpellList>;
-
+  public championsSelectResult: ChampionSelect;
   public listGeneralSpells: SpellList = new SpellList()
-  public TESTE: SpellList = new SpellList()
+  public spellsList: Array<SpellList> = new Array<SpellList>()
+
+  public searchChampionInput: string; //*Input
+  private selectedSpell: number;
 
   public spellsSelectionsItems: any = [];
-  private selectedSpell: number = 0;
 
-  public get hasPassives(): boolean { return this.spells.length > 0; }
-
-  constructor(private championsService: ChampionsService) {
+  constructor(
+    private championsService: ChampionsService,
+    private cacheService: CacheService
+  ) {
     this.championsSelectResult = new ChampionSelect();
-    this.spells = new Array<SpellList>();
+    this.listGeneralSpells = new SpellList()
+    this.spellsList = new Array<SpellList>()
+
+    this.searchChampionInput = "";
+    this.selectedSpell = 0;
   }
 
   async ngOnInit(): Promise<void> {
-    this.setSpellsSelections()
+    this.setSpellsSelections();
+
+    if (this.cacheService.get('champions') == null) {
+      await this.getChampions();
+    }
+
+    this.getSpells();
   }
 
-  private setSpellsSelections() {
+  private async getChampions(): Promise<void> {
+    const result = await this.championsService.getChampions() as ResponseModel<Champions>;
+    this.cacheService.set('champions', JSON.stringify(result.data));
+  }
+
+  private getSpells(): void {
+    const spells = Object.values(JSON.parse(this.cacheService.get('champions') as string)) as Champions[];
+    this.spellsList = this.championsService.getChampionsSpells(spells);
+  }
+
+  private setSpellsSelections(): void {
     const spellsList = getSpellsList()
-    this.spellsSelectionsItems = spellsList.map(element => {
-      return {
-        active: false,
-        label: element[1],
-        key: element[0]
-      }
-    })
+    this.spellsSelectionsItems = spellsList
+      .map(element => { return { active: false, label: element[1], key: element[0] } })
   }
 
   public selectSpell(spellActive: number): void {
+    this.selectedSpell = spellActive;
     this.searchChampionInput = '';
     this.listGeneralSpells = new SpellList();
 
@@ -54,27 +71,18 @@ export class CreateChampionComponent implements OnInit {
     anotherSpells.forEach((x: any) => x.active = false)
     this.spellsSelectionsItems[spellActive].active = true;
 
-    //*Define spell active to global use.
-    this.selectedSpell = spellActive;
-
-    if (!this.hasPassives) {
-      this.spells = this.championsService.getChampionsSpells();
-    }
-
-    this.TESTE = this.spells[spellActive];
-    this.listGeneralSpells = this.spells[spellActive];
+    this.listGeneralSpells = this.spellsList[spellActive];
   }
-
 
   public filterSpell(): void {
     this.listGeneralSpells = new SpellList();
 
     if (this.searchChampionInput == '') {
-      this.listGeneralSpells.spells = this.TESTE.spells;
+      this.listGeneralSpells.spells = this.spellsList[this.selectedSpell].spells;
     } else {
       this.listGeneralSpells.spells = [
-        ...this.TESTE.spells.filter(x => { return x.champion.toLowerCase().includes(this.searchChampionInput.toLowerCase()) }),
-        ...this.TESTE.spells.filter(x => { return x.title.toLowerCase().includes(this.searchChampionInput.toLowerCase()) })
+        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.champion.toLowerCase().includes(this.searchChampionInput.toLowerCase()) }),
+        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.title.toLowerCase().includes(this.searchChampionInput.toLowerCase()) })
       ];
     }
   }
@@ -84,3 +92,6 @@ export class CreateChampionComponent implements OnInit {
     this.championsSelectResult.spells[this.selectedSpell] = spellSelected;
   }
 }
+
+
+//REVER LOAD DEMORADO DAS IMAGENS

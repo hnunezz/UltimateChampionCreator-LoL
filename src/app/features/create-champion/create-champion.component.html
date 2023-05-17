@@ -1,7 +1,10 @@
 <div onselectstart="return false">
   <main>
     <figure>
-      <img src="../../../assets/images/champions/splash/MasterYi_0.jpg" />
+      <img
+        src="../../../assets/images/champions/splash/MasterYi_0.jpg"
+        alt="MasterYi_0"
+      />
 
       <label>
         <span> O ESPADACHIM WUJU </span>
@@ -19,7 +22,11 @@
           (click)="selectSpell(spellsSelectionsItems[0].key)">
 
           <ng-container *ngIf="championsSelectResult.spells[0]">
-            <img [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[0].image">
+            <img
+              loading="lazy"
+              [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[0].image"
+              [alt]="spellsSelectionsItems[0].label"
+            >
           </ng-container>
 
           <strong>{{ spellsSelectionsItems[0].label }}</strong>
@@ -33,10 +40,14 @@
               <div
                 class="champion-spell-content_{{spell.label}}"
                 [ngClass]="{'active': spell.active}"
-                (click)="selectSpell(spell.key)">
+                (click)="selectSpell(spell.key); ">
 
                 <ng-container *ngIf="championsSelectResult.spells[i]">
-                  <img [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[i].image">
+                  <img
+                    loading="lazy"
+                    [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[i].image"
+                    [alt]="spell.label"
+                  >
                 </ng-container>
 
                 <strong>{{ spell.label }}</strong>
