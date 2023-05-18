@@ -18,12 +18,10 @@ export class ChampionsService {
 
   constructor(private http: HttpClient,) { }
 
-
   async getChampions(): Promise<ResponseModel<Champions>> {
     const response$ = await lastValueFrom(this.http.get(this._url)) as ResponseModel<Champions>;
     return response$;
   }
-
 
   public getChampionsSpells(champion: Array<Champions>): SpellList[] {
     const cacheKey = "championsSpells";

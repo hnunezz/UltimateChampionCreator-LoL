@@ -93,5 +93,4 @@ export class CreateChampionComponent implements OnInit {
   }
 }
 
-
 //REVER LOAD DEMORADO DAS IMAGENS

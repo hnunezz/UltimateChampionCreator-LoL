@@ -65,26 +65,30 @@
           (ngModelChange)="filterSpell()"
         >
         <div class="spell-main">
-          <ng-container *ngFor="let spell of listGeneralSpells.spells; let i = index">
-            <section
-              class="champion-spell-details"
-              [ngClass]="{'active': spell.selected}"
-              (click)="selectHability(listGeneralSpells.spells, spell)"
-            >
-              <figure>
-                <img [src]="'../../../assets/images/spells/'+spell.image">
-              </figure>
+          <p-virtualScroller [value]="listGeneralSpells.spells" scrollHeight="550px" [itemSize]="30" [lazy]="true">
+            <!-- <ng-container *ngFor="let spell of listGeneralSpells.spells; let i = index"> -->
+              <ng-template pTemplate="item" let-spell>
+                <section
+                  class="champion-spell-details"
+                  [ngClass]="{'active': spell.selected}"
+                  (click)="selectHability(listGeneralSpells.spells, spell)"
+                >
+                  <figure>
+                    <img [src]="'../../../assets/images/spells/'+spell.image">
+                  </figure>
 
-              <div class="details">
-                <label>
-                  <span class="champion-name"> {{spell.champion}} </span>
-                  <span class="spell-name"> {{spell.title}} </span>
-                </label>
+                  <div class="details">
+                    <label>
+                      <span class="champion-name"> {{spell.champion}} </span>
+                      <span class="spell-name"> {{spell.title}} </span>
+                    </label>
 
-                <span class="spell-description">{{spell.description}}</span>
-              </div>
-            </section>
-          </ng-container>
+                    <span class="spell-description">{{spell.description}}</span>
+                  </div>
+                </section>
+              </ng-template>
+            <!-- </ng-container> -->
+          </p-virtualScroller>
         </div>
       </div>
     </section>
