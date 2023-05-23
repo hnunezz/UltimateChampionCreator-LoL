@@ -7,15 +7,20 @@ import { CreateChampionComponent } from './create-champion.component';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
 
 import { VirtualScrollerModule } from 'primeng/virtualscroller'
+import {DialogModule} from 'primeng/dialog';
+import { SharedModule } from 'primeng/api';
+import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
+import { ChampionListComponent } from './champion-list/champion-list.component';
 
 @NgModule({
-  declarations: [CreateChampionComponent],
+  declarations: [CreateChampionComponent, ChampionListComponent],
   imports: [
     CommonModule,
     CreateChampionRoutingModule,
-    ButtonModule,
     FormsModule,
-    VirtualScrollerModule
+    VirtualScrollerModule,
+    DialogModule,
+    SharedComponentsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

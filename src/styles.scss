@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "../src/assets/base/base.scss";
+@import "../src/assets/layout/button.scss";
 
-@import '../src/assets/base/base.scss';
-@import '../src/assets/layout/button.scss';
-
-@import '../src/assets/layout/primeng/p-virtualScroller.scss';
-
+@import "../src/assets/layout/primeng/p-virtualScroller.scss";
 
 *::-webkit-scrollbar {
   width: 10px;
@@ -19,4 +18,33 @@
   background-color: #a9a9a9;
   border-radius: 10px;
   border: 1px solid #ffffff00;
+}
+
+:host ::ng-deep .p-button {
+  margin: 0 0.5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+p-dialog {
+  .p-dialog {
+    .p-dialog-header,
+    .p-dialog-content,
+    .p-dialog-footer {
+      background-color: #091428;
+    }
+  }
 }

@@ -19,10 +19,14 @@ export class CreateChampionComponent implements OnInit {
   public listGeneralSpells: SpellList = new SpellList()
   public spellsList: Array<SpellList> = new Array<SpellList>()
 
-  public searchChampionInput: string; //*Input
-  private selectedSpell: number;
+  public selectedSpell: number;
 
-  public spellsSelectionsItems: any = [];
+  public spellsSelectionsItems: Array<any> = [];
+
+  public get hasSpellsSelect(): boolean {
+    const result = this.spellsSelectionsItems.filter(x => x.active);
+    return result.length != 0;
+  }
 
   constructor(
     private championsService: ChampionsService,
@@ -32,7 +36,6 @@ export class CreateChampionComponent implements OnInit {
     this.listGeneralSpells = new SpellList()
     this.spellsList = new Array<SpellList>()
 
-    this.searchChampionInput = "";
     this.selectedSpell = 0;
   }
 
@@ -64,7 +67,6 @@ export class CreateChampionComponent implements OnInit {
 
   public selectSpell(spellActive: number): void {
     this.selectedSpell = spellActive;
-    this.searchChampionInput = '';
     this.listGeneralSpells = new SpellList();
 
     const anotherSpells = this.spellsSelectionsItems.filter((x: any) => x.key != spellActive);
@@ -74,23 +76,24 @@ export class CreateChampionComponent implements OnInit {
     this.listGeneralSpells = this.spellsList[spellActive];
   }
 
-  public filterSpell(): void {
+  public filterSpell(event: string): void {
     this.listGeneralSpells = new SpellList();
 
-    if (this.searchChampionInput == '') {
+    if (event == '') {
       this.listGeneralSpells.spells = this.spellsList[this.selectedSpell].spells;
     } else {
       this.listGeneralSpells.spells = [
-        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.champion.toLowerCase().includes(this.searchChampionInput.toLowerCase()) }),
-        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.title.toLowerCase().includes(this.searchChampionInput.toLowerCase()) })
+        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.champion.toLowerCase().includes(event.toLowerCase()) }),
+        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.title.toLowerCase().includes(event.toLowerCase()) })
       ];
     }
   }
 
-  public selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect): void {
-    allSpells.forEach((element: SpellSelect) => element.selected = (element === spellSelected))
-    this.championsSelectResult.spells[this.selectedSpell] = spellSelected;
+  public setHability(event: SpellSelect): void {
+    this.championsSelectResult.spells[this.selectedSpell] = event;
   }
+  displayMaximizable: boolean;
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
 }
-
-//REVER LOAD DEMORADO DAS IMAGENS
+}

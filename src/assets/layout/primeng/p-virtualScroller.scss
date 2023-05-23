@@ -3,4 +3,8 @@ p-virtualscroller {
   .p-virtualscroller-item {
     height: 80px !important;
   }
+  .p-virtualscroller .p-virtualscroller-content {
+    background-color: transparent;
+  }
+
 }
