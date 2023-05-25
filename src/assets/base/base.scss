@@ -8,7 +8,8 @@ body {
   display: block;
   background-color: #010a13;
 
-  font-family: "Caudex";
+  font-family: "Caudex", serif;
+
   font-size: 20px;
 }
 
@@ -21,5 +22,9 @@ figure {
 strong,
 p,
 span {
-  font-family: "Caudex";
+  font-family: "Caudex", serif;
+}
+
+* {
+  box-sizing: content-box !important;
 }

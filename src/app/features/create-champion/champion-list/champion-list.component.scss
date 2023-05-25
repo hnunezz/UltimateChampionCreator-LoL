@@ -33,7 +33,8 @@ section.champion-spell-details {
       cursor: pointer;
 
       span {
-        font-family: "Caudex";
+        font-family: "Caudex", serif;
+
         font-style: normal;
         font-size: 24px;
         color: white;
@@ -47,7 +48,8 @@ section.champion-spell-details {
     }
 
     span.spell-description {
-      font-family: "Sans Serif Collection";
+      font-family: "Caudex", serif;
+
       font-style: normal;
       font-weight: 400;
       font-size: 18px;

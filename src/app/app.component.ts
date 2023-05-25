@@ -9,7 +9,7 @@ import { Champions } from './shared/models/champions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Welcolme to Perfect Champ';
+  title = 'Ultimate Champion Creator';
 
   constructor() { }
 
