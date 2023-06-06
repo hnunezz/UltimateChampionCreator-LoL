@@ -1,4 +1,4 @@
-<section [class]="'btn ' + styleClass">
+<section [class]="'btn ' + styleClass" (click)="onClickEmitter()">
 
   <!--? Clip-Path To Outside Button Border-->
   <div id="outside-border-button">
@@ -8,5 +8,5 @@
   </div>
   <!--? Clip-Path To Outside Button Border-->
 
-  <button (click)="onClickEmitter($event)">{{ label }}</button>
+  <button >{{ label }}</button>
 </section>

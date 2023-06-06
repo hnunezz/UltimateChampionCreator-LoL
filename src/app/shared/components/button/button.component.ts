@@ -9,9 +9,9 @@ export class ButtonComponent {
 
   @Input() public label: string;
   @Input() public styleClass: string
-  @Output() public onClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public onClick = new EventEmitter();
 
-  public onClickEmitter(event: Event): void {
-    this.onClick.emit(event);
+  public onClickEmitter(): void {
+    this.onClick.emit();
   }
 }

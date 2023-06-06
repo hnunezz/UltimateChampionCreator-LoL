@@ -27,8 +27,9 @@
   </aside>
 </footer>
 
-<p-dialog [visible]="moreInformation" [modal]="true" [style]="{width: '50vw'}" styleClass='information-modal' [maximizable]="true"
+<p-dialog [(visible)]="moreInformation" [modal]="true" [style]="{width: '50vw'}" styleClass='information-modal' [maximizable]="true"
   [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="header"> <strong>Ultimate Champion Creator</strong> </ng-template>
   <label>
     <p>
       Bem-vindo ao nosso incrível aplicativo baseado em League of Legends, onde você tem o poder de criar o campeão
@@ -36,7 +37,7 @@
     </p>
     <p>
       Imagine ser capaz de montar o seu próprio campeão, combinando as habilidades icônicas do jogo.
-      Com a nossa plataforma interativa, você pode preencher os comandos básicos do League of Legends - P, Q, W, E e R - com
+      Com a nossa plataforma interativa, você pode preencher os comandos básicos do League of Legends - <b>P, Q, W, E e R</b>- com
       habilidades selecionadas de qualquer campeão existente.
     </p>
     <p>
@@ -49,7 +50,7 @@
 
     <p>
       E a diversão não para por aí!
-      Após criar o seu campeão personalizado, você pode compartilhar orgulhosamente a sua combinação única de habilidades
+      Após criar o seu campeão personalizado, você pode <i>compartilhar</i> orgulhosamente a sua combinação única de habilidades
       nas
       redes sociais.
       Mostre aos seus amigos e à comunidade o resultado da sua criação, inspire outros jogadores e debata sobre as
@@ -66,7 +67,7 @@
       Legends.
     </p>
     <p>
-      O poder está em suas mãos, e a glória espera por você!
+      <i>O poder está em suas mãos, e a glória espera por você!</i>
     </p>
   </label>
 </p-dialog>

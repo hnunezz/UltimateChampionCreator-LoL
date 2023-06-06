@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Champions } from '../models/champions';
 import { Observable, from, lastValueFrom, map } from 'rxjs';
 import { ResponseModel } from '../models/response-model.models';
-import { SpellList, SpellSelect } from '../models/spell-select';
+import { ChampionList, SpellList, SpellSelect } from '../models/spell-select';
 import { getSpellsList } from '../enums/spells';
 
 @Injectable({
@@ -51,6 +51,31 @@ export class ChampionsService {
 
       result.push({ type, typeLabel, spells });
     }
+
+    localStorage.setItem(cacheKey, JSON.stringify(result));
+    return result;
+  }
+
+  public getChampionsList(champion: Array<Champions>): ChampionList[] {
+    const cacheKey = "championsSelection";
+    const cachedChamps = localStorage.getItem(cacheKey);
+
+    if (cachedChamps) { return JSON.parse(cachedChamps); }
+
+    const result: ChampionList[] = [];
+
+    champion.forEach((champ) => {
+      result.push({
+        id: champ.key,
+        id_name: champ.id,
+        name: champ.name,
+        title: champ.title,
+        description: champ.lore,
+        image: champ.image.full,
+        tiles: champ.image.sprite,
+        selected: false
+      });
+    });
 
     localStorage.setItem(cacheKey, JSON.stringify(result));
     return result;

@@ -11,16 +11,19 @@ import {DialogModule} from 'primeng/dialog';
 import { SharedModule } from 'primeng/api';
 import { SharedComponentsModule } from 'src/app/shared/components/shared-components.module';
 import { ChampionListComponent } from './champion-list/champion-list.component';
+import { SpellListComponent } from './spell-list/spell-list.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
-  declarations: [CreateChampionComponent, ChampionListComponent],
+  declarations: [CreateChampionComponent, ChampionListComponent, SpellListComponent],
   imports: [
     CommonModule,
     CreateChampionRoutingModule,
     FormsModule,
     VirtualScrollerModule,
     DialogModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    DynamicDialogModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

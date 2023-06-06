@@ -1,0 +1,22 @@
+<p-virtualScroller [value]="listGeneralSpells.spells" scrollHeight="550px" [itemSize]="30" [lazy]="true">
+  <ng-template pTemplate="item" let-spell>
+    <section
+      class="champion-spell-details"
+      [ngClass]="{'active': spell.selected}"
+      (click)="selectHability(listGeneralSpells.spells, spell)"
+    >
+      <figure>
+        <img [src]="'../../../assets/images/spells/'+spell.image">
+      </figure>
+
+      <div class="details">
+        <label>
+          <span class="champion-name"> {{spell.champion}} </span>
+          <span class="spell-name"> {{spell.title}} </span>
+        </label>
+
+        <span class="spell-description">{{spell.description}}</span>
+      </div>
+    </section>
+  </ng-template>
+</p-virtualScroller>

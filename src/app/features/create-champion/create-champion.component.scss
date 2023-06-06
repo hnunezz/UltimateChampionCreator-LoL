@@ -19,6 +19,7 @@ div {
         bottom: 32px;
         left: 20%;
         right: 20%;
+        gap: 4px;
 
         display: flex;
         flex-direction: column;
@@ -73,11 +74,15 @@ div {
           height: 96px;
 
           position: relative;
+          transition: ease-out 0.3s;
+          border: 3px solid transparent;
 
           &.active {
+            transition: ease 0.3s;
             border: 3px solid #c89b3c;
 
             strong {
+              transition: ease 0.3s;
               width: 102px;
               left: -3px;
 
@@ -96,8 +101,9 @@ div {
           }
 
           strong {
+            transition: ease-out 0.1s;
             position: absolute;
-            bottom: -49px;
+            bottom: -57px;
             color: white;
             font-size: 32px;
             width: 96px;
@@ -147,5 +153,4 @@ app-input-text {
   margin: 32px auto;
   color: white;
   display: flex;
-  display: block;
 }

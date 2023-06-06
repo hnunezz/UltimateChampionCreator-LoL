@@ -8,6 +8,7 @@ import { MainModule } from './features/main/main.module';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [
     AppComponent,

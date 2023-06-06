@@ -1,27 +1,30 @@
-import { Champions } from 'src/app/shared/models/champions';
-import { ChampionsService } from './../../shared/services/champions.service';
 import { Component, OnInit } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
-import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
+import { DialogService } from 'primeng/dynamicdialog';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
-import { CacheService } from 'src/app/shared/services/cache-service.service';
+import { Champions } from 'src/app/shared/models/champions';
 import { ResponseModel } from 'src/app/shared/models/response-model.models';
-
+import { ChampionList, SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
+import { CacheService } from 'src/app/shared/services/cache-service.service';
+import { ChampionsService } from './../../shared/services/champions.service';
+import { ChampionListComponent } from './champion-list/champion-list.component';
 @Component({
   selector: 'app-create-champion',
   templateUrl: './create-champion.component.html',
-  styleUrls: ['./create-champion.component.scss']
+  styleUrls: ['./create-champion.component.scss'],
+  providers: [DialogService]
 })
 export class CreateChampionComponent implements OnInit {
 
   public championsSelectResult: ChampionSelect;
   public listGeneralSpells: SpellList = new SpellList()
   public spellsList: Array<SpellList> = new Array<SpellList>()
+  public championsList: Array<ChampionList> = new Array<ChampionList>()
 
   public selectedSpell: number;
 
   public spellsSelectionsItems: Array<any> = [];
+  public displayMaximizable: boolean;
 
   public get hasSpellsSelect(): boolean {
     const result = this.spellsSelectionsItems.filter(x => x.active);
@@ -30,7 +33,8 @@ export class CreateChampionComponent implements OnInit {
 
   constructor(
     private championsService: ChampionsService,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    public dialogService: DialogService,
   ) {
     this.championsSelectResult = new ChampionSelect();
     this.listGeneralSpells = new SpellList()
@@ -47,6 +51,7 @@ export class CreateChampionComponent implements OnInit {
     }
 
     this.getSpells();
+    this.getChampionsList();
   }
 
   private async getChampions(): Promise<void> {
@@ -57,6 +62,11 @@ export class CreateChampionComponent implements OnInit {
   private getSpells(): void {
     const spells = Object.values(JSON.parse(this.cacheService.get('champions') as string)) as Champions[];
     this.spellsList = this.championsService.getChampionsSpells(spells);
+  }
+
+  private getChampionsList(): void {
+    const spells = Object.values(JSON.parse(this.cacheService.get('champions') as string)) as Champions[];
+    this.championsList = this.championsService.getChampionsList(spells);
   }
 
   private setSpellsSelections(): void {
@@ -92,8 +102,24 @@ export class CreateChampionComponent implements OnInit {
   public setHability(event: SpellSelect): void {
     this.championsSelectResult.spells[this.selectedSpell] = event;
   }
-  displayMaximizable: boolean;
-  showMaximizableDialog() {
+
+  public showMaximizableDialog() {
     this.displayMaximizable = true;
-}
+  }
+
+  public championSelected: ChampionList = {
+    description: "",
+    id: 266,
+    id_name: "Aatrox",
+    image: "Aatrox.png",
+    name: "Aatrox",
+    selected: true,
+    tiles: "champion0.png",
+    title: "a Espada Darkin"
+  };
+  public handleChampionSelectChange(event: ChampionList): void {
+    this.displayMaximizable = false;
+    this.championSelected = new ChampionList();
+    this.championSelected = event;
+  }
 }

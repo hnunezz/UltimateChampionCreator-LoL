@@ -1,0 +1,72 @@
+section.champion-spell-details {
+  width: 80%;
+  margin: 42px auto;
+  height: 80px;
+  display: flex;
+  gap: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+
+  figure {
+    height: 80px;
+    width: 80px;
+    position: unset;
+
+    img {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  div.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+
+    label {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        font-family: "Caudex", serif;
+
+        font-style: normal;
+        font-size: 24px;
+        color: white;
+
+        &.champion-name {
+          font-size: 26px;
+          font-weight: 700;
+          color: #c89b3c;
+        }
+      }
+    }
+
+    span.spell-description {
+      font-family: "Caudex", serif;
+      transition: ease-out 0.3s;
+      background-color: transparent;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      color: white;
+      line-height: 18px;
+      max-height: 70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  &.active {
+    transition: ease 0.3s;
+    background-color: rgba(65, 71, 78, 0.5);
+  }
+}

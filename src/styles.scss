@@ -51,17 +51,25 @@ p-dialog {
     }
   }
 
-  &.information-modal {
-    .p-dialog {
-      .p-dialog-content {
+  .p-dialog {
+    &.information-modal {
+      .p-dialog-content,
+      .p-dialog-header {
         label {
           display: flex;
           flex-direction: column;
-          gap: 6px;
+          gap: 16px;
 
           p {
+            font-family: "Inter", sans-serif;
             color: white;
           }
+        }
+
+        strong {
+          font-family: "Inter", sans-serif;
+          color: white;
+          font-size: 32px;
         }
       }
     }

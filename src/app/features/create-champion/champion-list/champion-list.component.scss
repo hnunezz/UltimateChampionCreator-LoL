@@ -1,70 +1,140 @@
-section.champion-spell-details {
-  width: 80%;
-  margin: 42px auto;
-  height: 80px;
+main {
   display: flex;
-  gap: 40px;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  cursor: pointer;
+  flex-direction: column;
+  gap: 20px;
 
-  figure {
-    height: 80px;
-    width: 80px;
-    position: unset;
+  > div {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 0 20px;
+    gap: 40px 80px;
+    max-height: 500px;
+    overflow: auto;
+    overflow-x: hidden;
 
-    img {
-      height: 80px;
-      width: 80px;
-    }
-  }
-
-  div.details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-
-    label {
+    section {
       display: flex;
-      gap: 24px;
+      flex-direction: column;
+      gap: 10px;
       align-items: center;
+      min-height: 180px;
       cursor: pointer;
 
+      img {
+        width: 100%;
+
+        transition: ease-out 0.3s;
+        border: 3px solid transparent;
+        opacity: 0.6;
+      }
+
       span {
-        font-family: "Caudex", serif;
-
-        font-style: normal;
-        font-size: 24px;
+        text-align: center;
         color: white;
+        font-size: 18px;
+        font-weight: 700;
+      }
 
-        &.champion-name {
-          font-size: 26px;
-          font-weight: 700;
-          color: #c89b3c;
+      &.active {
+        img {
+          transition: ease 0.3s;
+          border: 3px solid #c89b3c;
+          opacity: 1;
+        }
+
+        span {
+          width: 100%;
+          border: 10px solid;
+          border-image-slice: 1;
+          border-width: 5px;
+          border-left: 0;
+          border-right: 0;
+          border-bottom: 0;
+          border-image-source: linear-gradient(
+            270.01deg,
+            #90eae6 61.49%,
+            rgba(144, 234, 230, 0) 109.89%
+          );
         }
       }
     }
-
-    span.spell-description {
-      font-family: "Caudex", serif;
-
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      color: white;
-      line-height: 18px;
-      max-height: 70px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
   }
 
-  &.active {
-    background-color: rgba(65, 71, 78, 0.5);
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
+
+// section.champion-spell-details {
+//   width: 80%;
+//   margin: 42px auto;
+//   height: 80px;
+//   display: flex;
+//   gap: 40px;
+//   justify-content: flex-start;
+//   align-items: center;
+//   flex-direction: row;
+//   cursor: pointer;
+
+//   figure {
+//     height: 80px;
+//     width: 80px;
+//     position: unset;
+
+//     img {
+//       height: 80px;
+//       width: 80px;
+//     }
+//   }
+
+//   div.details {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     gap: 4px;
+
+//     label {
+//       display: flex;
+//       gap: 24px;
+//       align-items: center;
+//       cursor: pointer;
+
+//       span {
+//         font-family: "Caudex", serif;
+
+//         font-style: normal;
+//         font-size: 24px;
+//         color: white;
+
+//         &.champion-name {
+//           font-size: 26px;
+//           font-weight: 700;
+//           color: #c89b3c;
+//         }
+//       }
+//     }
+
+//     span.spell-description {
+//       font-family: "Caudex", serif;
+
+//       font-style: normal;
+//       font-weight: 400;
+//       font-size: 18px;
+//       color: white;
+//       line-height: 18px;
+//       max-height: 70px;
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//       display: -webkit-box;
+//       -webkit-line-clamp: 2;
+//       -webkit-box-orient: vertical;
+//     }
+//   }
+
+//   &.active {
+//     background-color: rgba(65, 71, 78, 0.5);
+//   }
+// }

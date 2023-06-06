@@ -2,13 +2,13 @@
   <main>
     <figure>
       <img
-        src="../../../assets/images/champions/splash/MasterYi_0.jpg"
-        alt="MasterYi_0"
+        [src]="'../../../assets/images/champions/splash/'+championSelected.id_name+'_0.jpg'"
+        [alt]="championSelected.name"
       />
 
       <label>
-        <span> O ESPADACHIM WUJU </span>
-        <span> MASTER YI </span>
+        <span> {{ championSelected.title }} </span>
+        <span> {{ championSelected.name }} </span>
 
         <app-button (onClick)="showMaximizableDialog()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
       </label>
@@ -66,11 +66,11 @@
         </ng-container>
 
         <div class="spell-main">
-          <app-champion-list
+          <app-spell-list
             [listGeneralSpells]="listGeneralSpells"
             [selectedSpell]="selectedSpell"
             (emitSelectedSpell)="setHability($event)"
-          ></app-champion-list>
+          ></app-spell-list>
         </div>
       </div>
     </section>
@@ -80,22 +80,20 @@
 <p-dialog
   [(visible)]="displayMaximizable"
   [modal]="true"
-  [style]="{width: '50vw'}"
-  [maximizable]="true"
+  [style]="{width: '80vw'}"
+  [maximizable]="false"
   [draggable]="false"
   [resizable]="false"
 >
   <ng-template pTemplate="header">
     <app-input-text
-      placeholder="Pesquise a habilidade ou campeão"
+      placeholder="Pesquise o campeão"
       (modelChange)="filterSpell($event)"
     ></app-input-text>
   </ng-template>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <ng-template pTemplate="footer">
-          <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Ok" styleClass="p-button-text"></p-button>
-      </ng-template>
+
+  <app-champion-list
+    [championsList]="championsList"
+    (championSelectChangeEmitter)="handleChampionSelectChange($event)"
+  ></app-champion-list>
 </p-dialog>
