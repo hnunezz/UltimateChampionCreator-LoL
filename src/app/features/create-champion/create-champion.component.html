@@ -10,7 +10,7 @@
         <span> {{ championSelected.title }} </span>
         <span> {{ championSelected.name }} </span>
 
-        <app-button (onClick)="showMaximizableDialog()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
+        <app-button (onClick)="show()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
       </label>
     </figure>
 
@@ -74,26 +74,11 @@
         </div>
       </div>
     </section>
+
+    <section>
+      compartilhe seu campeao
+    </section>
   </main>
 </div>
 
-<p-dialog
-  [(visible)]="displayMaximizable"
-  [modal]="true"
-  [style]="{width: '80vw'}"
-  [maximizable]="false"
-  [draggable]="false"
-  [resizable]="false"
->
-  <ng-template pTemplate="header">
-    <app-input-text
-      placeholder="Pesquise o campeão"
-      (modelChange)="filterSpell($event)"
-    ></app-input-text>
-  </ng-template>
-
-  <app-champion-list
-    [championsList]="championsList"
-    (championSelectChangeEmitter)="handleChampionSelectChange($event)"
-  ></app-champion-list>
-</p-dialog>
+<!--TODO ADICIONAR SPINNER QUANDO TROCAR SPELL E LEVAR A POSICAO DO SCROLL PRO TOP 0-->

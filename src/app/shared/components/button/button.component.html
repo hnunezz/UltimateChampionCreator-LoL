@@ -1,4 +1,8 @@
-<section [class]="'btn ' + styleClass" (click)="onClickEmitter()">
+<section
+  [class]="'btn ' + styleClass"
+  [ngClass]="{'disable': disable}"
+  (click)="onClickEmitter()"
+>
 
   <!--? Clip-Path To Outside Button Border-->
   <div id="outside-border-button">
@@ -8,5 +12,5 @@
   </div>
   <!--? Clip-Path To Outside Button Border-->
 
-  <button >{{ label }}</button>
+  <span class="button">{{ label }}</span>
 </section>

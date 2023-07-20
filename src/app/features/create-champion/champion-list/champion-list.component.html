@@ -1,16 +1,33 @@
-<main>
-  <div>
-    <ng-container *ngFor="let champ of championsList">
-      <section [ngClass]="{'active': champ.selected}" (click)="selectChamp(champ)">
-        <img [src]="'../../../../assets/images/champions/tiles/'+champ.id_name+'_0.jpg'">
+<main onselectstart="return false">
+  <app-input-text
+    placeholder="Pesquise o campeão"
+    (modelChange)="filterChampion($event)"
+  ></app-input-text>
 
-        <span> {{ champ.name }}</span>
-      </section>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="hasChampion; else noData">
+    <div>
+      <ng-container *ngFor="let champ of championsList">
+        <section [ngClass]="{'active': champ.selected}" (click)="selectChamp(champ)">
+          <img [src]="'../../../../assets/images/champions/tiles/'+champ.id_name+'_0.jpg'" draggable="false">
 
-  <p (click)="handleChampionSelectChange()">clique</p>
+          <span> {{ champ.name }}</span>
+        </section>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #noData>
+    <div class="noData">
+      <strong> Nenhuma informação encontrada! </strong>
+    </div>
+  </ng-template>
+
   <footer>
-    <app-button styleClass="btn-primary" label="TROCAR CAMPEÃO" (onClick)="handleChampionSelectChange()"></app-button>
+    <app-button
+      styleClass="btn-primary"
+      label="TROCAR CAMPEÃO"
+      (onClick)="handleChampionSelectChange()"
+      [disable]="hasChampionSelect"
+    ></app-button>
   </footer>
 </main>

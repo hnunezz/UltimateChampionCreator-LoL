@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ChampionList } from 'src/app/shared/models/spell-select';
+import { ChampionsService } from 'src/app/shared/services/champions.service';
+import { FilterService } from 'src/app/shared/services/filter-service.service';
 
 @Component({
   selector: 'app-champion-list',
@@ -7,14 +10,21 @@ import { ChampionList } from 'src/app/shared/models/spell-select';
   styleUrls: ['./champion-list.component.scss']
 })
 export class ChampionListComponent {
-  @Input() championsList: Array<ChampionList> = [];
-  @Output() championSelectChangeEmitter: EventEmitter<ChampionList> = new EventEmitter<ChampionList>();
+  public championsList: ChampionList[] = [];
 
-  constructor() { }
+  public get hasChampion(): boolean { return this.championsList.length > 0; }
+  public get hasChampionSelect(): boolean { return !this.championsList.some(x => x.selected == true) }
 
-  displayMaximizable: boolean;
-  showMaximizableDialog() {
-    this.displayMaximizable = true;
+  constructor(
+    private filterService: FilterService,
+    private ref: DynamicDialogRef,
+    private championService: ChampionsService
+  ) {
+    this.championsList = this.championService.getChampionsList();
+  }
+
+  public filterChampion(event: string): void {
+    this.championsList = this.filterService.filterChampion(event);
   }
 
   public selectChamp(champion: ChampionList): void {
@@ -23,8 +33,7 @@ export class ChampionListComponent {
   }
 
   public handleChampionSelectChange(): void {
-    const result = this.championsList.find(x => x.selected)
-    this.championSelectChangeEmitter.emit(result);
-    this.displayMaximizable = false;
+    const result = this.championsList.find(x => x.selected) as ChampionList;
+    this.ref.close(result);
   }
 }

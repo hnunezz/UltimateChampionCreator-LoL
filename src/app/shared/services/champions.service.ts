@@ -10,17 +10,29 @@ import { getSpellsList } from '../enums/spells';
 @Injectable({
   providedIn: 'root'
 })
-export class ChampionsService {
+export class ChampionsService implements OnInit {
 
   private _url = '../../../assets/data/champions-full.json';
-
+  private _champions: Array<Champions>;
   // private _urlChampionsDetails = 'https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/'; //? {champ}.json
 
-  constructor(private http: HttpClient,) { }
+  constructor(
+    private http: HttpClient,
+    private cacheService: CacheService
+  ) { }
 
-  async getChampions(): Promise<ResponseModel<Champions>> {
-    const response$ = await lastValueFrom(this.http.get(this._url)) as ResponseModel<Champions>;
-    return response$;
+  async ngOnInit(): Promise<void> {
+    const cachedSpells = localStorage.getItem('champions');
+    if (cachedSpells) {
+      this._champions = JSON.parse(cachedSpells);
+    } else {
+      await this.getChampions();
+    }
+  }
+
+  private async getChampions() {
+    const result = await lastValueFrom(this.http.get(this._url)) as ResponseModel<Champions>;
+    this.cacheService.set('champions', JSON.stringify(result.data));
   }
 
   public getChampionsSpells(champion: Array<Champions>): SpellList[] {
@@ -36,7 +48,7 @@ export class ChampionsService {
       const [type, typeLabel] = spellsList[i];
       const spells: SpellSelect[] = [];
 
-      champion.forEach((champ) => {
+      this._champions.forEach((champ) => {
         const spellIndex = type - 1;
         const spell = spellIndex === -1 ? champ.passive : champ.spells[spellIndex];
 
@@ -56,7 +68,7 @@ export class ChampionsService {
     return result;
   }
 
-  public getChampionsList(champion: Array<Champions>): ChampionList[] {
+  public getChampionsList(): ChampionList[] {
     const cacheKey = "championsSelection";
     const cachedChamps = localStorage.getItem(cacheKey);
 
@@ -64,7 +76,7 @@ export class ChampionsService {
 
     const result: ChampionList[] = [];
 
-    champion.forEach((champ) => {
+    this._champions.forEach((champ) => {
       result.push({
         id: champ.key,
         id_name: champ.id,

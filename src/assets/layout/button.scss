@@ -1,15 +1,25 @@
 section.btn {
+  transition: ease-out 0.3s;
   position: relative;
 
-  button {
-    outline: none;
+  &.disable {
+    transition: ease 0.3s;
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 246px;
     height: 64px;
     font-size: 16px;
     line-height: 24px;
     font-weight: 700;
-    font-family: 'Caudex', serif;
-
+    font-family: "Caudex", serif;
 
     padding: 0 !important;
     color: black;
@@ -18,7 +28,7 @@ section.btn {
     &:hover {
       cursor: pointer;
 
-      button {
+      .button {
         transition: ease 0.3s;
       }
     }
@@ -29,7 +39,7 @@ section.btn {
       display: block;
     }
 
-    button {
+    .button {
       background: #0bc6e3;
       border: 1px solid #0bc6e3;
     }
@@ -37,7 +47,7 @@ section.btn {
     &:hover {
       cursor: pointer;
 
-      button {
+      .button {
         background-color: transparent;
         color: #0bc6e3;
         transition: ease 0.3s;
@@ -46,7 +56,7 @@ section.btn {
   }
 
   &.btn-secondary {
-    button {
+    .button {
       width: 136px;
       height: 41px;
       background: #ffffff;
@@ -56,7 +66,7 @@ section.btn {
     &:hover {
       cursor: pointer;
 
-      button {
+      .button {
         background-color: transparent;
         color: white;
         transition: ease 0.3s;

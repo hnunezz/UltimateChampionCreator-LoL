@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
 import { Champions } from 'src/app/shared/models/champions';
@@ -8,6 +8,7 @@ import { ChampionList, SpellList, SpellSelect } from 'src/app/shared/models/spel
 import { CacheService } from 'src/app/shared/services/cache-service.service';
 import { ChampionsService } from './../../shared/services/champions.service';
 import { ChampionListComponent } from './champion-list/champion-list.component';
+import { FilterService } from 'src/app/shared/services/filter-service.service';
 @Component({
   selector: 'app-create-champion',
   templateUrl: './create-champion.component.html',
@@ -19,7 +20,6 @@ export class CreateChampionComponent implements OnInit {
   public championsSelectResult: ChampionSelect;
   public listGeneralSpells: SpellList = new SpellList()
   public spellsList: Array<SpellList> = new Array<SpellList>()
-  public championsList: Array<ChampionList> = new Array<ChampionList>()
 
   public selectedSpell: number;
 
@@ -45,28 +45,12 @@ export class CreateChampionComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.setSpellsSelections();
-
-    if (this.cacheService.get('champions') == null) {
-      await this.getChampions();
-    }
-
     this.getSpells();
-    this.getChampionsList();
-  }
-
-  private async getChampions(): Promise<void> {
-    const result = await this.championsService.getChampions() as ResponseModel<Champions>;
-    this.cacheService.set('champions', JSON.stringify(result.data));
   }
 
   private getSpells(): void {
     const spells = Object.values(JSON.parse(this.cacheService.get('champions') as string)) as Champions[];
     this.spellsList = this.championsService.getChampionsSpells(spells);
-  }
-
-  private getChampionsList(): void {
-    const spells = Object.values(JSON.parse(this.cacheService.get('champions') as string)) as Champions[];
-    this.championsList = this.championsService.getChampionsList(spells);
   }
 
   private setSpellsSelections(): void {
@@ -103,10 +87,6 @@ export class CreateChampionComponent implements OnInit {
     this.championsSelectResult.spells[this.selectedSpell] = event;
   }
 
-  public showMaximizableDialog() {
-    this.displayMaximizable = true;
-  }
-
   public championSelected: ChampionList = {
     description: "",
     id: 266,
@@ -117,9 +97,16 @@ export class CreateChampionComponent implements OnInit {
     tiles: "champion0.png",
     title: "a Espada Darkin"
   };
-  public handleChampionSelectChange(event: ChampionList): void {
-    this.displayMaximizable = false;
-    this.championSelected = new ChampionList();
-    this.championSelected = event;
+
+  show() {
+    const ref = this.dialogService.open(ChampionListComponent, {
+      width: '80%',
+    });
+
+    ref.onClose.subscribe((champion: ChampionList) => {
+      if (champion) {
+        this.championSelected = champion;
+      }
+    })
   }
 }

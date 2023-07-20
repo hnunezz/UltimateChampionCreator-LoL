@@ -7,11 +7,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ButtonComponent {
 
-  @Input() public label: string;
-  @Input() public styleClass: string
-  @Output() public onClick = new EventEmitter();
+  @Input() label: string;
+  @Input() styleClass: string
+  @Input() disable: boolean = false;
+  @Output() onClick = new EventEmitter();
 
   public onClickEmitter(): void {
-    this.onClick.emit();
+    if (!this.disable) { this.onClick.emit(); }
   }
 }
