@@ -137,20 +137,7 @@ div {
 
         display: flex;
         flex-direction: column;
-
-        div.spell-main {
-          max-height: 80%;
-          overflow: scroll;
-          overflow-x: hidden;
-        }
       }
     }
   }
-}
-
-app-input-text {
-  width: 80%;
-  margin: 32px auto;
-  color: white;
-  display: flex;
 }

@@ -22,9 +22,9 @@ export class ChampionsService implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    const cachedSpells = localStorage.getItem('champions');
-    if (cachedSpells) {
-      this._champions = JSON.parse(cachedSpells);
+    const cachedChampions = localStorage.getItem('champions');
+    if (cachedChampions) {
+      this._champions = JSON.parse(cachedChampions);
     } else {
       await this.getChampions();
     }
@@ -35,7 +35,7 @@ export class ChampionsService implements OnInit {
     this.cacheService.set('champions', JSON.stringify(result.data));
   }
 
-  public getChampionsSpells(champion: Array<Champions>): SpellList[] {
+  public getChampionsSpells(): SpellList[] {
     const cacheKey = "championsSpells";
     const cachedSpells = localStorage.getItem(cacheKey);
 

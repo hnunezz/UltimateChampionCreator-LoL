@@ -26,14 +26,7 @@ export class CreateChampionComponent implements OnInit {
   public spellsSelectionsItems: Array<any> = [];
   public displayMaximizable: boolean;
 
-  public get hasSpellsSelect(): boolean {
-    const result = this.spellsSelectionsItems.filter(x => x.active);
-    return result.length != 0;
-  }
-
   constructor(
-    private championsService: ChampionsService,
-    private cacheService: CacheService,
     public dialogService: DialogService,
   ) {
     this.championsSelectResult = new ChampionSelect();
@@ -45,18 +38,13 @@ export class CreateChampionComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.setSpellsSelections();
-    this.getSpells();
   }
-
-  private getSpells(): void {
-    const spells = Object.values(JSON.parse(this.cacheService.get('champions') as string)) as Champions[];
-    this.spellsList = this.championsService.getChampionsSpells(spells);
-  }
-
   private setSpellsSelections(): void {
     const spellsList = getSpellsList()
     this.spellsSelectionsItems = spellsList
       .map(element => { return { active: false, label: element[1], key: element[0] } })
+
+      this.spellsSelectionsItems[0].active = true;
   }
 
   public selectSpell(spellActive: number): void {
@@ -68,19 +56,6 @@ export class CreateChampionComponent implements OnInit {
     this.spellsSelectionsItems[spellActive].active = true;
 
     this.listGeneralSpells = this.spellsList[spellActive];
-  }
-
-  public filterSpell(event: string): void {
-    this.listGeneralSpells = new SpellList();
-
-    if (event == '') {
-      this.listGeneralSpells.spells = this.spellsList[this.selectedSpell].spells;
-    } else {
-      this.listGeneralSpells.spells = [
-        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.champion.toLowerCase().includes(event.toLowerCase()) }),
-        ...this.spellsList[this.selectedSpell].spells.filter(x => { return x.title.toLowerCase().includes(event.toLowerCase()) })
-      ];
-    }
   }
 
   public setHability(event: SpellSelect): void {

@@ -28,6 +28,8 @@
       label="TROCAR CAMPEÃO"
       (onClick)="handleChampionSelectChange()"
       [disable]="hasChampionSelect"
+      [pTooltip]="hasChampionSelect ? 'Selecione um campeão' : ''"
+      tooltipPosition="top"
     ></app-button>
   </footer>
 </main>

@@ -13,6 +13,7 @@ import { SharedComponentsModule } from 'src/app/shared/components/shared-compone
 import { ChampionListComponent } from './champion-list/champion-list.component';
 import { SpellListComponent } from './spell-list/spell-list.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [CreateChampionComponent, ChampionListComponent, SpellListComponent],
@@ -24,6 +25,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     DialogModule,
     SharedComponentsModule,
     DynamicDialogModule,
+    TooltipModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

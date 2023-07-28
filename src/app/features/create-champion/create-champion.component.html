@@ -58,20 +58,10 @@
       </div>
 
       <div class="champion-spell-list">
-        <ng-container *ngIf="hasSpellsSelect">
-          <app-input-text
-            placeholder="Pesquise a habilidade ou campeão"
-            (modelChange)="filterSpell($event)"
-          ></app-input-text>
-        </ng-container>
-
-        <div class="spell-main">
-          <app-spell-list
-            [listGeneralSpells]="listGeneralSpells"
-            [selectedSpell]="selectedSpell"
-            (emitSelectedSpell)="setHability($event)"
-          ></app-spell-list>
-        </div>
+        <app-spell-list
+          [selectedSpell]="selectedSpell"
+          (emitSelectedSpell)="setHability($event)"
+        ></app-spell-list>
       </div>
     </section>
 
@@ -82,3 +72,4 @@
 </div>
 
 <!--TODO ADICIONAR SPINNER QUANDO TROCAR SPELL E LEVAR A POSICAO DO SCROLL PRO TOP 0-->
+<!--TODO ADICIONAR INFORMACAO PRA QQUANDO NAO ENCONTRAR SPELL NA BUSCA DE SPELL LIST-->
