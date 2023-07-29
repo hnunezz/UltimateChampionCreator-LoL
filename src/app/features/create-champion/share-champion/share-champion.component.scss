@@ -1,0 +1,130 @@
+main {
+  display: flex;
+  justify-content: center;
+
+  section {
+    width: 70%;
+    background: #091428;
+    border: 1px solid #c89b3c;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    img {
+      aspect-ratio: 3/1;
+      object-fit: fill;
+    }
+
+    ul {
+      img {
+        aspect-ratio: 3/1;
+        object-fit: fill;
+        width: 100%;
+      }
+
+      li {
+        &.gradient-container {
+          width: 100%;
+          height: 49px;
+          position: relative;
+
+          div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: linear-gradient(
+              180deg,
+              rgba(1, 10, 19, 0) 0%,
+              #091428 80%
+            );
+            top: -50px;
+
+            label {
+              display: flex;
+              padding: 0px 30px;
+              justify-content: space-between;
+
+              span {
+                white-space: nowrap;
+                color: #fff;
+                text-align: center;
+                font-family: Caudex;
+                font-size: 60px;
+                font-style: italic;
+                font-weight: 700;
+                line-height: 125%;
+              }
+            }
+          }
+        }
+
+        &.champion-spell-details {
+          width: calc(100% - 60px);
+          padding: 20px 30px;
+          display: flex;
+          gap: 20px;
+          justify-content: flex-start;
+          align-items: flex-start;
+          flex-direction: row;
+          cursor: pointer;
+
+          figure {
+            height: 60px;
+            width: 60px;
+            position: unset;
+            padding-top: 6px;
+
+            img {
+              height: 60px;
+              width: 60px;
+            }
+          }
+
+          div.details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+
+            label {
+              display: flex;
+              gap: 24px;
+              align-items: center;
+              cursor: pointer;
+
+              span {
+                font-family: "Caudex", serif;
+
+                font-style: normal;
+                font-size: 24px;
+                color: white;
+
+                &.champion-name {
+                  font-size: 26px;
+                  font-weight: 700;
+                  color: #c89b3c;
+                }
+              }
+            }
+
+            span.spell-description {
+              font-family: "Caudex", serif;
+              transition: ease-out 0.3s;
+              background-color: transparent;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 18px;
+              color: white;
+            }
+          }
+
+          &.active {
+            transition: ease 0.3s;
+            background-color: rgba(65, 71, 78, 0.5);
+          }
+        }
+      }
+    }
+  }
+}

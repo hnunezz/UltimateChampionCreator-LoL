@@ -14,9 +14,10 @@ import { ChampionListComponent } from './champion-list/champion-list.component';
 import { SpellListComponent } from './spell-list/spell-list.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { ShareChampionComponent } from './share-champion/share-champion.component';
 
 @NgModule({
-  declarations: [CreateChampionComponent, ChampionListComponent, SpellListComponent],
+  declarations: [CreateChampionComponent, ChampionListComponent, SpellListComponent, ShareChampionComponent],
   imports: [
     CommonModule,
     CreateChampionRoutingModule,
