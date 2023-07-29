@@ -24,19 +24,30 @@ export class CreateChampionComponent implements OnInit {
   public selectedSpell: number;
 
   public spellsSelectionsItems: Array<any> = [];
-  public displayMaximizable: boolean;
+  public loading: boolean;
 
   constructor(
     public dialogService: DialogService,
+    private championService: ChampionsService
   ) {
     this.championsSelectResult = new ChampionSelect();
     this.listGeneralSpells = new SpellList()
     this.spellsList = new Array<SpellList>()
 
     this.selectedSpell = 0;
+
+    this.loading = true;
   }
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
+
+    const cachedChampions = localStorage.getItem('champions');
+    if (!cachedChampions) {
+      await this.championService.getChampions();
+    }
+
+    this.loading = false
     this.setSpellsSelections();
   }
   private setSpellsSelections(): void {

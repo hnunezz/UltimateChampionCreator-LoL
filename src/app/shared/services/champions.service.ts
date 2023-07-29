@@ -10,7 +10,7 @@ import { getSpellsList } from '../enums/spells';
 @Injectable({
   providedIn: 'root'
 })
-export class ChampionsService implements OnInit {
+export class ChampionsService {
 
   private _url = '../../../assets/data/champions-full.json';
   private _champions: Array<Champions>;
@@ -21,21 +21,14 @@ export class ChampionsService implements OnInit {
     private cacheService: CacheService
   ) { }
 
-  async ngOnInit(): Promise<void> {
-    const cachedChampions = localStorage.getItem('champions');
-    if (cachedChampions) {
-      this._champions = JSON.parse(cachedChampions);
-    } else {
-      await this.getChampions();
-    }
-  }
-
-  private async getChampions() {
+  public async getChampions() {
     const result = await lastValueFrom(this.http.get(this._url)) as ResponseModel<Champions>;
     this.cacheService.set('champions', JSON.stringify(result.data));
   }
 
   public getChampionsSpells(): SpellList[] {
+    this.setChampion();
+
     const cacheKey = "championsSpells";
     const cachedSpells = localStorage.getItem(cacheKey);
 
@@ -69,6 +62,8 @@ export class ChampionsService implements OnInit {
   }
 
   public getChampionsList(): ChampionList[] {
+    this.setChampion();
+
     const cacheKey = "championsSelection";
     const cachedChamps = localStorage.getItem(cacheKey);
 
@@ -92,4 +87,10 @@ export class ChampionsService implements OnInit {
     localStorage.setItem(cacheKey, JSON.stringify(result));
     return result;
   }
+
+  private setChampion() {
+    const cachedSpells = localStorage.getItem('champions');
+    this._champions = JSON.parse(cachedSpells as string) as Array<Champions>;
+  }
+
 }

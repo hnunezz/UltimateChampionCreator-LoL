@@ -6,29 +6,35 @@
       <li class="gradient-container">
         <div>
           <label>
-            <span>1</span>
+            <span>
+              O Campeão Perfeito de
+              <strong>Henrique Nunes</strong>
+            </span>
+
             <span>{{champion.name}}</span>
           </label>
         </div>
       </li>
 
       <ng-container *ngFor="let spell of championsSelectResult?.spells">
-        <li class="champion-spell-details">
+        <li class="champion-spell-details" [ngClass]="{'noData': !spell?.selected}">
           <figure>
-            <img [src]="'../../../assets/images/spells/'+spell?.image">
+            <img [src]="!spell?.selected ? '../../../assets/images/champions/no-selected.png' : '../../../assets/images/spells/'+spell?.image">
           </figure>
 
           <div class="details">
             <label>
-              <span class="champion-name"> {{spell?.champion}} </span>
-              <span class="spell-name"> {{spell?.title}} </span>
+              <span class="champion-name"> {{ !spell?.selected ? '?' : spell?.champion }} </span>
+              <span class="spell-name"> {{ !spell?.selected ? '?' : spell?.title }} </span>
             </label>
 
-            <span class="spell-description">{{spell?.description}}</span>
+            <span class="spell-description">{{ !spell?.selected ? '- - -' : spell?.description }}</span>
           </div>
         </li>
       </ng-container>
     </ul>
+
+    <app-button styleClass="btn-primary" label="COMPARTILHE SEU CAMPEÃO"></app-button>
   </section>
 </main>
 <!-- <p>{{championsSelectResult | json}}</p> -->

@@ -34,9 +34,12 @@ div {
           color: #ffffff;
           font-size: 96px;
           white-space: nowrap;
+          text-transform: uppercase;
 
           &:first-child {
             font-size: 32px;
+            font-weight: 500;
+            font-style: normal;
           }
         }
       }

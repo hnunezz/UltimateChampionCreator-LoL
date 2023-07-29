@@ -9,15 +9,15 @@ main {
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 0px;
 
-    img {
+    > img {
       aspect-ratio: 3/1;
       object-fit: fill;
     }
 
     ul {
-      img {
+      > img {
         aspect-ratio: 3/1;
         object-fit: fill;
         width: 100%;
@@ -50,10 +50,28 @@ main {
                 color: #fff;
                 text-align: center;
                 font-family: Caudex;
-                font-size: 60px;
+                font-size: 40px;
                 font-style: italic;
                 font-weight: 700;
                 line-height: 125%;
+
+                &:first-child {
+                  font-size: 16px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: baseline;
+                  justify-content: space-around;
+
+                  strong {
+                    color: #0bc6e3;
+                    font-size: 32px;
+                    font-style: normal;
+                  }
+                }
+
+                &:last-child {
+                  text-transform: uppercase;
+                }
               }
             }
           }
@@ -75,7 +93,7 @@ main {
             position: unset;
             padding-top: 6px;
 
-            img {
+            > img {
               height: 60px;
               width: 60px;
             }
@@ -119,12 +137,45 @@ main {
             }
           }
 
+          // div.noData {
+          //   display: flex;
+          //   gap: 20px;
+          //   width: calc(100% - 60px);
+          //   padding: 20px 30px;
+          //   width: 100%;
+          //   background: #9191911a;
+          //   min-height: 80px;
+
+          //   img {
+          //     height: 40px !important;
+          //     width: 40px !important;
+          //     padding-top: 6px;
+          //   }
+
+          //   strong {
+          //     color: white;
+          //     display: flex;
+          //     font-size: 26px;
+          //   }
+          // }
+
           &.active {
             transition: ease 0.3s;
             background-color: rgba(65, 71, 78, 0.5);
+          }
+
+          &.noData {
+            min-height: 80px;
           }
         }
       }
     }
   }
+}
+
+app-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0px;
 }

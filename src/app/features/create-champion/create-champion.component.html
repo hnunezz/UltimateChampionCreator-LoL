@@ -1,76 +1,78 @@
 <div onselectstart="return false">
-  <main>
-    <figure>
-      <img
-        [src]="'../../../assets/images/champions/splash/'+championSelected.id_name+'_0.jpg'"
-        [alt]="championSelected.name"
-      />
+  <ng-container *ngIf="!loading">
+    <main>
+      <figure>
+        <img
+          [src]="'../../../assets/images/champions/centered/'+championSelected.id_name+'_0.jpg'"
+          [alt]="championSelected.name"
+        />
+        <label>
+          <span> {{ championSelected.title }} </span>
+          <span> {{ championSelected.name }} </span>
 
-      <label>
-        <span> {{ championSelected.title }} </span>
-        <span> {{ championSelected.name }} </span>
+          <app-button (onClick)="show()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
+        </label>
+      </figure>
 
-        <app-button (onClick)="show()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
-      </label>
-    </figure>
+      <section>
+        <div class="champion-spell-content">
+          <div
+            class="champion-spell-content_{{spellsSelectionsItems[0].label}}"
+            [ngClass]="{'active': spellsSelectionsItems[0].active}"
+            (click)="selectSpell(spellsSelectionsItems[0].key)">
 
-    <section>
-      <div class="champion-spell-content">
-        <div
-          class="champion-spell-content_{{spellsSelectionsItems[0].label}}"
-          [ngClass]="{'active': spellsSelectionsItems[0].active}"
-          (click)="selectSpell(spellsSelectionsItems[0].key)">
-
-          <ng-container *ngIf="championsSelectResult.spells[0]">
-            <img
-              loading="lazy"
-              [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[0].image"
-              [alt]="spellsSelectionsItems[0].label"
-            >
-          </ng-container>
-
-          <strong>{{ spellsSelectionsItems[0].label }}</strong>
-        </div>
-
-        <hr>
-
-        <div class="spell-keys">
-          <ng-container *ngFor="let spell of spellsSelectionsItems; let i = index">
-            <ng-container *ngIf="i > 0">
-              <div
-                class="champion-spell-content_{{spell.label}}"
-                [ngClass]="{'active': spell.active}"
-                (click)="selectSpell(spell.key); ">
-
-                <ng-container *ngIf="championsSelectResult.spells[i]">
-                  <img
-                    loading="lazy"
-                    [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[i].image"
-                    [alt]="spell.label"
-                  >
-                </ng-container>
-
-                <strong>{{ spell.label }}</strong>
-              </div>
+            <ng-container *ngIf="championsSelectResult.spells[0]">
+              <img
+                loading="lazy"
+                [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[0].image"
+                [alt]="spellsSelectionsItems[0].label"
+              >
             </ng-container>
-          </ng-container>
+
+            <strong>{{ spellsSelectionsItems[0].label }}</strong>
+          </div>
+
+          <hr>
+
+          <div class="spell-keys">
+            <ng-container *ngFor="let spell of spellsSelectionsItems; let i = index">
+              <ng-container *ngIf="i > 0">
+                <div
+                  class="champion-spell-content_{{spell.label}}"
+                  [ngClass]="{'active': spell.active}"
+                  (click)="selectSpell(spell.key); ">
+
+                  <ng-container *ngIf="championsSelectResult.spells[i]">
+                    <img
+                      loading="lazy"
+                      [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[i].image"
+                      [alt]="spell.label"
+                    >
+                  </ng-container>
+
+                  <strong>{{ spell.label }}</strong>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
         </div>
-      </div>
 
-      <div class="champion-spell-list">
-        <app-spell-list
-          [selectedSpell]="selectedSpell"
-          (emitSelectedSpell)="setHability($event)"
-        ></app-spell-list>
-      </div>
-    </section>
+        <div class="champion-spell-list">
+          <app-spell-list
+            [selectedSpell]="selectedSpell"
+            (emitSelectedSpell)="setHability($event)"
+          ></app-spell-list>
+        </div>
+      </section>
 
-    <app-share-champion
-    [championsSelectResult]="championsSelectResult"
-    [champion]="championSelected"
-    ></app-share-champion>
-  </main>
+      <app-share-champion
+      [championsSelectResult]="championsSelectResult"
+      [champion]="championSelected"
+      ></app-share-champion>
+    </main>
+  </ng-container>
 </div>
 
 <!--TODO ADICIONAR SPINNER QUANDO TROCAR SPELL E LEVAR A POSICAO DO SCROLL PRO TOP 0-->
 <!--TODO ADICIONAR INFORMACAO PRA QQUANDO NAO ENCONTRAR SPELL NA BUSCA DE SPELL LIST-->
+<!--TODO LUGAR ONDE SELECIONA SPELL SEGUIR O MESMO PADRAO DE ESTAR DENTRO DE UMA DIV PARA PODER ADICIONAR EFEITO DE BLUR NA IMAGEM DO CHMAP-->
