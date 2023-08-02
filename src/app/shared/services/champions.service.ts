@@ -24,11 +24,15 @@ export class ChampionsService {
   public async getChampions() {
     const result = await lastValueFrom(this.http.get(this._url)) as ResponseModel<Champions>;
     this.cacheService.set('champions', JSON.stringify(result.data));
+
+    this.setChampions(JSON.stringify(result.data))
+  }
+
+  public setChampions(cached: string) {
+    this._champions = Object.values(JSON.parse(cached));
   }
 
   public getChampionsSpells(): SpellList[] {
-    this.setChampion();
-
     const cacheKey = "championsSpells";
     const cachedSpells = localStorage.getItem(cacheKey);
 
@@ -62,8 +66,6 @@ export class ChampionsService {
   }
 
   public getChampionsList(): ChampionList[] {
-    this.setChampion();
-
     const cacheKey = "championsSelection";
     const cachedChamps = localStorage.getItem(cacheKey);
 
@@ -87,10 +89,4 @@ export class ChampionsService {
     localStorage.setItem(cacheKey, JSON.stringify(result));
     return result;
   }
-
-  private setChampion() {
-    const cachedSpells = localStorage.getItem('champions');
-    this._champions = JSON.parse(cachedSpells as string) as Array<Champions>;
-  }
-
 }

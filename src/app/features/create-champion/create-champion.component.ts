@@ -26,6 +26,13 @@ export class CreateChampionComponent implements OnInit {
   public spellsSelectionsItems: Array<any> = [];
   public loading: boolean;
 
+
+  public championSelected: ChampionList = new ChampionList();
+
+  public get hasChampionSelected(): boolean {
+    return this.championSelected.name !== undefined;
+  }
+
   constructor(
     public dialogService: DialogService,
     private championService: ChampionsService
@@ -45,9 +52,11 @@ export class CreateChampionComponent implements OnInit {
     const cachedChampions = localStorage.getItem('champions');
     if (!cachedChampions) {
       await this.championService.getChampions();
+    } else {
+      this.championService.setChampions(cachedChampions);
     }
 
-    this.loading = false
+    this.loading = false;
     this.setSpellsSelections();
   }
   private setSpellsSelections(): void {
@@ -72,17 +81,6 @@ export class CreateChampionComponent implements OnInit {
   public setHability(event: SpellSelect): void {
     this.championsSelectResult.spells[this.selectedSpell] = event;
   }
-
-  public championSelected: ChampionList = {
-    description: "",
-    id: 266,
-    id_name: "Aatrox",
-    image: "Aatrox.png",
-    name: "Aatrox",
-    selected: true,
-    tiles: "champion0.png",
-    title: "a Espada Darkin"
-  };
 
   show() {
     const ref = this.dialogService.open(ChampionListComponent, {

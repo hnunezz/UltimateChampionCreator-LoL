@@ -1,13 +1,21 @@
 div {
   main {
     height: 100%;
-
     display: flex;
     flex-direction: column;
-    gap: 77px;
+    gap: 48px;
 
     figure {
       position: relative;
+
+      &.first-view {
+        height: 509px;
+        background: rgb(19 19 19 / 79%);
+
+        img {
+          display: none;
+        }
+      }
       img {
         width: 100%;
         aspect-ratio: 3/1;
@@ -16,7 +24,7 @@ div {
 
       label {
         position: absolute;
-        bottom: 32px;
+        bottom: 62px;
         left: 20%;
         right: 20%;
         gap: 4px;
@@ -42,6 +50,10 @@ div {
             font-style: normal;
           }
         }
+
+        app-button {
+          z-index: 1;
+        }
       }
     }
 
@@ -51,6 +63,15 @@ div {
       justify-content: center;
       align-items: center;
       gap: 96px;
+      position: relative;
+
+      div.gradient-container {
+        width: 100%;
+        height: 20%;
+        position: absolute;
+        background: linear-gradient(180deg, rgba(1, 10, 19, 0) 0%, #010a13 90%);
+        top: -228px;
+      }
 
       div.champion-spell-content {
         display: flex;

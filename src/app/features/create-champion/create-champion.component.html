@@ -1,20 +1,24 @@
 <div onselectstart="return false">
-  <ng-container *ngIf="!loading">
     <main>
-      <figure>
-        <img
+      <figure [ngClass]="{'first-view': !hasChampionSelected}">
+        <ng-container *ngIf="hasChampionSelected">
+          <img
           [src]="'../../../assets/images/champions/centered/'+championSelected.id_name+'_0.jpg'"
           [alt]="championSelected.name"
-        />
+          />
+        </ng-container>
         <label>
-          <span> {{ championSelected.title }} </span>
-          <span> {{ championSelected.name }} </span>
+          <span> {{ hasChampionSelected ? championSelected.title : 'Ultimate Champion Creator' }} </span>
+          <span> {{ hasChampionSelected ? championSelected.name : 'Bem-Vindo' }} </span>
 
-          <app-button (onClick)="show()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
+          <ng-container *ngIf="!loading">
+            <app-button (onClick)="show()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
+          </ng-container>
         </label>
       </figure>
 
       <section>
+        <div class="gradient-container"></div>
         <div class="champion-spell-content">
           <div
             class="champion-spell-content_{{spellsSelectionsItems[0].label}}"
@@ -58,10 +62,12 @@
         </div>
 
         <div class="champion-spell-list">
-          <app-spell-list
-            [selectedSpell]="selectedSpell"
-            (emitSelectedSpell)="setHability($event)"
-          ></app-spell-list>
+          <ng-container *ngIf="!loading">
+            <app-spell-list
+              [selectedSpell]="selectedSpell"
+              (emitSelectedSpell)="setHability($event)"
+            ></app-spell-list>
+          </ng-container>
         </div>
       </section>
 
@@ -70,9 +76,8 @@
       [champion]="championSelected"
       ></app-share-champion>
     </main>
-  </ng-container>
 </div>
 
 <!--TODO ADICIONAR SPINNER QUANDO TROCAR SPELL E LEVAR A POSICAO DO SCROLL PRO TOP 0-->
 <!--TODO ADICIONAR INFORMACAO PRA QQUANDO NAO ENCONTRAR SPELL NA BUSCA DE SPELL LIST-->
-<!--TODO LUGAR ONDE SELECIONA SPELL SEGUIR O MESMO PADRAO DE ESTAR DENTRO DE UMA DIV PARA PODER ADICIONAR EFEITO DE BLUR NA IMAGEM DO CHMAP-->
+<!--TODO CRIAR TRIANGULOS ABAIXO DA SPELL SELECIONADA -->

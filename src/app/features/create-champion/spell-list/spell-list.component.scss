@@ -17,6 +17,7 @@ section.champion-spell-details {
     img {
       height: 80px;
       width: 80px;
+      border-radius: 4px;
     }
   }
 
@@ -68,6 +69,7 @@ section.champion-spell-details {
   &.active {
     transition: ease 0.3s;
     background-color: rgba(65, 71, 78, 0.5);
+    border-radius: 4px 0px 0px 4px;
   }
 }
 

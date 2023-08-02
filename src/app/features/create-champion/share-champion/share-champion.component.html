@@ -1,17 +1,23 @@
 <main>
   <section>
     <ul>
-      <img [src]="'../../../assets/images/champions/splash/'+champion.id_name+'_0.jpg'">
+      <ng-container *ngIf="hasChampion; else firstView">
+        <img [src]="'../../../assets/images/champions/splash/'+champion.id_name+'_0.jpg'">
+      </ng-container>
+
+      <ng-template #firstView>
+        <div class="firstView"></div>
+      </ng-template>
 
       <li class="gradient-container">
         <div>
           <label>
             <span>
-              O Campeão Perfeito de
-              <strong>Henrique Nunes</strong>
+              {{ hasChampion ? 'O Campeão Perfeito de' : 'Nenhum Campeão Selecionado!' }}
+              <strong>{{ hasChampion ? 'Henrique Nunes' : '- - -' }}</strong>
             </span>
 
-            <span>{{champion.name}}</span>
+            <span>{{hasChampion ? champion.name : ''}}</span>
           </label>
         </div>
       </li>
@@ -34,7 +40,7 @@
       </ng-container>
     </ul>
 
-    <app-button styleClass="btn-primary" label="COMPARTILHE SEU CAMPEÃO"></app-button>
+    <app-button styleClass="btn-primary" label="COMPARTILHE SEU CAMPEÃO" [disable]="!disableButton"></app-button>
   </section>
 </main>
 <!-- <p>{{championsSelectResult | json}}</p> -->
