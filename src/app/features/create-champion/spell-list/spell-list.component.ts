@@ -1,5 +1,6 @@
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { VirtualScroller } from 'primeng/virtualscroller';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
 import { ChampionsService } from 'src/app/shared/services/champions.service';
 import { FilterService } from 'src/app/shared/services/filter-service.service';
@@ -9,15 +10,28 @@ import { FilterService } from 'src/app/shared/services/filter-service.service';
   templateUrl: './spell-list.component.html',
   styleUrls: ['./spell-list.component.scss']
 })
-export class SpellListComponent {
+export class SpellListComponent implements OnChanges {
+  @ViewChild(VirtualScroller) el: VirtualScroller;
+  enabled: boolean = true;
 
   @Input() public selectedSpell: number;
   @Output() public emitSelectedSpell: EventEmitter<SpellSelect> = new EventEmitter<SpellSelect>();
 
   public listGeneralSpells: SpellList[] = []
 
-  constructor(private filterService: FilterService, private championService: ChampionsService) {
+  public get hasSpell(): boolean { return this.listGeneralSpells[this.selectedSpell].spells.length > 0; }
+
+  constructor(
+    private filterService: FilterService,
+    private championService: ChampionsService,
+    private changeDetector: ChangeDetectorRef) {
     this.listGeneralSpells = this.championService.getChampionsSpells();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes) {
+      this.reset();
+    }
   }
 
   public selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect): void {
@@ -27,5 +41,15 @@ export class SpellListComponent {
 
   public filterSpell(event: string): void {
     this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, 'championsSpells', this.selectedSpell);
+  }
+
+  private reset(): void {
+    this.enabled = false;
+
+    this.el?.scrollToIndex(0)
+    this.filterSpell('');
+    this.changeDetector.detectChanges();
+
+    this.enabled = true;
   }
 }

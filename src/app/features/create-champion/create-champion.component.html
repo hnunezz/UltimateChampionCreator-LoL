@@ -34,6 +34,8 @@
             </ng-container>
 
             <strong>{{ spellsSelectionsItems[0].label }}</strong>
+
+            <app-triangle></app-triangle>
           </div>
 
           <hr>
@@ -55,6 +57,8 @@
                   </ng-container>
 
                   <strong>{{ spell.label }}</strong>
+
+                  <app-triangle></app-triangle>
                 </div>
               </ng-container>
             </ng-container>
@@ -72,12 +76,17 @@
       </section>
 
       <app-share-champion
-      [championsSelectResult]="championsSelectResult"
-      [champion]="championSelected"
+        [championsSelectResult]="championsSelectResult"
+        [champion]="championSelected"
       ></app-share-champion>
     </main>
 </div>
+<!--TODO TELA DE LOGIN -->
+<!--TODO FUNCIONALIDADE DE LOGIN/LOGOUT/REGISTER-->
+<!--TODO FUNCIONALIDADE BOTAO DE COMPARTILHAR-->
 
-<!--TODO ADICIONAR SPINNER QUANDO TROCAR SPELL E LEVAR A POSICAO DO SCROLL PRO TOP 0-->
-<!--TODO ADICIONAR INFORMACAO PRA QQUANDO NAO ENCONTRAR SPELL NA BUSCA DE SPELL LIST-->
-<!--TODO CRIAR TRIANGULOS ABAIXO DA SPELL SELECIONADA -->
+<!--TODO OTIMIZAR/CLEAN CODE/MELHORAR CARREGAMENTO DAS IMAGENS-->
+<!--TODO MOBILE VIEW-->
+<!--TODO LOGO-->
+<!--TODO LINKS RODAPE-->
+

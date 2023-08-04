@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from './button/button.module';
 import { InputTextModule } from './input-text/input-text.module';
+import { TriangleComponent } from './layout/triangle/triangle.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TriangleComponent
+  ],
   imports: [
     CommonModule,
     ButtonModule,
@@ -14,7 +17,8 @@ import { InputTextModule } from './input-text/input-text.module';
   ],
   exports: [
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    TriangleComponent
   ]
 })
 export class SharedComponentsModule { }

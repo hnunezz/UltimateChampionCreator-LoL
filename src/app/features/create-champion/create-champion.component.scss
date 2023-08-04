@@ -101,12 +101,17 @@ div {
           transition: ease-out 0.3s;
           border: 3px solid transparent;
 
+          app-triangle {
+            display: none;
+          }
+
+
           &.active {
             transition: ease 0.3s;
             border: 3px solid #c89b3c;
 
             strong {
-              transition: ease 0.3s;
+              transition: ease 0.1s;
               width: 102px;
               left: -3px;
 
@@ -121,6 +126,9 @@ div {
                 #90eae6 61.49%,
                 rgba(144, 234, 230, 0) 109.89%
               );
+            }
+            app-triangle {
+              display: block;
             }
           }
 

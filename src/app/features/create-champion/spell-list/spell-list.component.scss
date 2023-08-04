@@ -80,3 +80,12 @@ app-input-text {
   color: white;
   display: flex;
 }
+
+div.noData{
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #c5c5c5;
+}
