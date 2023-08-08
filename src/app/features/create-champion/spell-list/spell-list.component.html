@@ -8,7 +8,7 @@
 
 
   <ng-container *ngIf="hasSpell; else noData">
-    <p-virtualScroller [value]="listGeneralSpells[selectedSpell].spells" scrollHeight="550px" [itemSize]="30" [lazy]="true" #el>
+    <p-virtualScroller [value]="listGeneralSpells[selectedSpell].spells" scrollHeight="550px" [itemSize]="120" [lazy]="true" #el>
       <ng-template pTemplate="item" let-spell>
         <section
           class="champion-spell-details"
@@ -25,7 +25,7 @@
               <span class="spell-name"> {{spell.title}} </span>
             </label>
 
-            <span class="spell-description">{{spell.description}}</span>
+            <span class="spell-description" [innerHTML]="spell.description"></span>
           </div>
         </section>
       </ng-template>

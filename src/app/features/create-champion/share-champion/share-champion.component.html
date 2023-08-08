@@ -1,5 +1,5 @@
-<main>
-  <section>
+<main >
+  <section id="capture">
     <ul>
       <ng-container *ngIf="hasChampion; else firstView">
         <img [src]="'../../../assets/images/champions/splash/'+champion.id_name+'_0.jpg'">
@@ -31,17 +31,27 @@
           <div class="details">
             <label>
               <span class="champion-name"> {{ !spell?.selected ? '?' : spell?.champion }} </span>
-              <span class="spell-name"> {{ !spell?.selected ? '?' : spell?.title }} </span>
+              <span class="spell-name"> {{ !spell?.selected ? '?' : spell?.title}} </span>
             </label>
 
-            <span class="spell-description">{{ !spell?.selected ? '- - -' : spell?.description }}</span>
+            <span class="spell-description" [innerHTML]="!spell?.selected ? '- - -' : spell?.description"></span>
           </div>
         </li>
       </ng-container>
     </ul>
 
-    <app-button styleClass="btn-primary" label="COMPARTILHE SEU CAMPEÃO" [disable]="!disableButton"></app-button>
+    <div style="height: 50px;  display: flex; align-items: center; justify-content: center;">
+      <p style="color: #ffffff;font-weight: 100;font-size: 18px;">Feito com: <strong style="color: #0bc6e3;font-weight: 900;font-size: 24px;">www.linkdosite.com.br</strong></p>
+    </div>
   </section>
+
+    <app-button
+      styleClass="btn-primary"
+      label="COMPARTILHE SEU CAMPEÃO"
+      [disable]="!disableButton"
+      (onClick)="share()"
+    ></app-button>
 </main>
-<!-- <p>{{championsSelectResult | json}}</p> -->
-<!-- <p>{{champion | json}}</p> -->
+
+<div id="display-for-canvas" style="display: none;"></div>
+<div id="display-for-generate-print" style="display: none;"></div>
