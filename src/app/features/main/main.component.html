@@ -5,5 +5,7 @@
     <router-outlet></router-outlet>
   </section>
 
-  <app-footer></app-footer>
+  <ng-container *ngIf="loginOrRegister">
+    <app-footer></app-footer>
+  </ng-container>
 </main>

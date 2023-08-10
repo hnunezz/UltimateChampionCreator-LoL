@@ -9,7 +9,11 @@ const routes: Routes = [
     loadChildren: () => import('../app/features/create-champion/create-champion.module').then(m => m.CreateChampionModule),
     // canActivate: [AuthGuard],
   },
-  // { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  {
+    path: 'abc',
+    component: MainComponent,
+    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+  },
 ];
 
 @NgModule({

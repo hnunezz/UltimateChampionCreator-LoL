@@ -1,6 +1,11 @@
 main#layout-main {
+  width: 100%;
+  height: 100%;
+
   section {
-    height: 100%;
+    // height: 100%;
     margin-bottom: 120px;
+    width: 100%;
+    height: calc(100% - 83px);
   }
 }
