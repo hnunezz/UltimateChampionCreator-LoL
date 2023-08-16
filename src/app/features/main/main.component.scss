@@ -1,11 +1,12 @@
 main#layout-main {
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
 
-  section {
-    // height: 100%;
-    margin-bottom: 120px;
-    width: 100%;
-    height: calc(100% - 83px);
-  }
+  // section {
+  //   //margin-bottom: 120px;
+  //   width: 100%;
+  //   height: calc(100% - 83px);
+  // }
 }

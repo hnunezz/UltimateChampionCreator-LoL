@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  public confirmPassword: string = '';
+  public password: string = '';
+  public email: string = '';
+
+  public isLogin: boolean = false;
+
 }

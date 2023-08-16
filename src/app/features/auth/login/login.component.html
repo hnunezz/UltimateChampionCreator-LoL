@@ -1,10 +1,41 @@
-
 <main>
-  <section>
-    <input type="text" placeholder="teste">
-    <input type="text" placeholder="teste">
-    <button type="submit">Login</button>
-  </section>
+  <div class="gradient-container"></div>
+  <section [ngClass]="{'isLogin': isLogin}">
+      <span>{{ isLogin ? 'Login' : 'Register' }}</span>
 
-  <img src="../../../../assets/images/Annie_1.jpg">
+      <div [ngClass]="{'active': email}">
+        <p>Email</p>
+        <input
+          type="text"
+          placeholder=""
+          [(ngModel)]="email"
+        >
+      </div>
+
+      <div [ngClass]="{'active': password}">
+        <p>Senha</p>
+        <input
+          type="password"
+          placeholder=""
+          [(ngModel)]="password"
+        >
+      </div>
+
+      <ng-container *ngIf="!isLogin">
+        <div [ngClass]="{'active': confirmPassword}">
+          <p>Confirmar Senha</p>
+          <input
+            type="password"
+            placeholder=""
+            [(ngModel)]="confirmPassword"
+          >
+        </div>
+      </ng-container>
+      <app-button
+        styleClass="btn-primary"
+        [label]="isLogin
+          ? 'Login'
+          : 'Register'"
+      ></app-button>
+  </section>
 </main>

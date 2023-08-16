@@ -1,22 +1,189 @@
-img {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
 main {
   position: relative;
-  overflow: hidden;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+
+  background-image: url(../../../../assets/images/Annie_1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 
   section {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    background: #010a13;
+    padding: 0px 60px;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    height: 430px;
+
+    -webkit-box-shadow: 0px 2px 28px 17px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 2px 28px 17px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 2px 28px 17px rgba(0, 0, 0, 0.75);
+
+    span {
+      color: white;
+      font-family: Caudex;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+    }
+
+    //*REGISTER
+    div {
+      width: 100%;
+      display: contents;
+      position: relative;
+
+      p {
+        font-family: Caudex;
+        font-size: 14px;
+
+        transition: ease-out 0.3s;
+
+        color: #ffffff52;
+        position: absolute;
+        bottom: 222px;
+        left: 61px;
+      }
+
+      input {
+        background-color: #010a13;
+        outline: none;
+        color: white;
+        font-family: Caudex;
+        width: 100%;
+        height: 42px;
+        transition: ease-out 0.3s;
+        border: 1px solid #ffffff52;
+        padding: 0px 10px;
+
+        &:focus {
+          transition: ease 0.3s;
+          border: 1px solid #0bc6e3;
+        }
+      }
+
+      &.active {
+        p {
+          transition: ease 0.3s;
+          bottom: 262px ;
+          color: #0bc6e3;
+        }
+      }
+
+      &:first-of-type {
+        p {
+          position: absolute;
+          bottom: 306px ;
+          left: 61px;
+        }
+
+        &.active {
+          p {
+            transition: ease 0.3s;
+            bottom: 346px ;
+            color: #0bc6e3;
+          }
+        }
+      }
+
+      &:last-of-type{
+        p {
+          position: absolute;
+          bottom: 140px ;
+          left: 61px;
+        }
+
+        &.active {
+          p {
+            transition: ease 0.3s;
+            bottom: 180px ;
+            color: #0bc6e3;
+          }
+        }
+      }
+    }
+    //*REGISTER
+
+    &.isLogin {
+      div {
+        width: 100%;
+        display: contents;
+        position: relative;
+
+        p {
+          font-family: Caudex;
+          font-size: 14px;
+
+          transition: ease-out 0.3s;
+
+          color: #ffffff52;
+          position: absolute;
+          bottom: 180px;
+          left: 61px;
+        }
+
+        input {
+          background-color: #010a13;
+          outline: none;
+          color: white;
+          font-family: Caudex;
+          width: 100%;
+          height: 42px;
+          transition: ease-out 0.3s;
+          border: 1px solid #ffffff52;
+          padding: 0px 10px;
+
+          &:focus {
+            transition: ease 0.3s;
+            border: 1px solid #0bc6e3;
+          }
+        }
+
+        &.active {
+          p {
+            transition: ease 0.3s;
+            bottom: 220px !important;
+            color: #0bc6e3;
+          }
+        }
+
+        &:first-of-type {
+          p {
+            position: absolute;
+            bottom: 266px;
+            left: 61px;
+          }
+
+          &.active {
+            p {
+              transition: ease 0.3s;
+              bottom: 304px !important;
+              color: #0bc6e3;
+            }
+          }
+        }
+      }
+    }
   }
+}
+
+.gradient-container {
+  width: 100%;
+  height: 12%;
+  position: absolute;
+  background: linear-gradient(0.6deg, rgba(1, 10, 19, 0) 23%, #131313 92%);
+  top: 0px;
 }
