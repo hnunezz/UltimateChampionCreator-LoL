@@ -78,7 +78,7 @@ main {
       &.active {
         p {
           transition: ease 0.3s;
-          bottom: 262px ;
+          bottom: 262px;
           color: #0bc6e3;
         }
       }
@@ -86,30 +86,30 @@ main {
       &:first-of-type {
         p {
           position: absolute;
-          bottom: 306px ;
+          bottom: 306px;
           left: 61px;
         }
 
         &.active {
           p {
             transition: ease 0.3s;
-            bottom: 346px ;
+            bottom: 346px;
             color: #0bc6e3;
           }
         }
       }
 
-      &:last-of-type{
+      &:last-of-type {
         p {
           position: absolute;
-          bottom: 140px ;
+          bottom: 140px;
           left: 61px;
         }
 
         &.active {
           p {
             transition: ease 0.3s;
-            bottom: 180px ;
+            bottom: 180px;
             color: #0bc6e3;
           }
         }
@@ -150,6 +150,7 @@ main {
             transition: ease 0.3s;
             border: 1px solid #0bc6e3;
           }
+
         }
 
         &.active {

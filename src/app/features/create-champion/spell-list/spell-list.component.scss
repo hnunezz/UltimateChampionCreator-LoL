@@ -32,18 +32,32 @@ section.champion-spell-details {
       gap: 24px;
       align-items: center;
       cursor: pointer;
-
       span {
         font-family: "Caudex", serif;
 
         font-style: normal;
         font-size: 24px;
         color: white;
+        position: relative;
 
         &.champion-name {
           font-size: 26px;
           font-weight: 700;
           color: #c89b3c;
+        }
+
+        i {
+          position: absolute;
+          right: -29px;
+          font-size: 16px;
+          top: 7px;
+          transition: ease-out 0.3s;
+          color: #919191;
+
+          &:hover{
+            transition: ease 0.3s;
+            color: #c89b3c;
+          }
         }
       }
     }
@@ -73,7 +87,6 @@ section.champion-spell-details {
   }
 }
 
-
 app-input-text {
   width: 80%;
   margin: 32px auto;
@@ -81,7 +94,7 @@ app-input-text {
   display: flex;
 }
 
-div.noData{
+div.noData {
   min-height: 500px;
   display: flex;
   justify-content: center;

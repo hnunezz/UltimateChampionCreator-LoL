@@ -22,7 +22,11 @@
           <div class="details">
             <label>
               <span class="champion-name"> {{spell.champion}} </span>
-              <span class="spell-name"> {{spell.title}} </span>
+              <span class="spell-name">
+                {{spell.title}}
+
+                <i class="pi pi-exclamation-circle"></i>
+              </span>
             </label>
 
             <span class="spell-description" [innerHTML]="spell.description"></span>

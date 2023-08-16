@@ -12,6 +12,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 0px;
+    cursor: default !important;
 
     > img {
       aspect-ratio: 3/1;
@@ -31,6 +32,7 @@ main {
       }
 
       li {
+
         &.gradient-container {
           width: 100%;
           height: 49px;
@@ -92,7 +94,6 @@ main {
           justify-content: flex-start;
           align-items: flex-start;
           flex-direction: row;
-          cursor: pointer;
 
           figure {
             height: 60px;
