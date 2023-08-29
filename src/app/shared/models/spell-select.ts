@@ -6,6 +6,7 @@ export class SpellSelect {
   title: string;
   image: string;
   selected: boolean;
+  hovered: boolean;
 }
 
 export class SpellList {

@@ -8,32 +8,41 @@
 
 
   <ng-container *ngIf="hasSpell; else noData">
-    <p-virtualScroller [value]="listGeneralSpells[selectedSpell].spells" scrollHeight="550px" [itemSize]="120" [lazy]="true" #el>
-      <ng-template pTemplate="item" let-spell>
-        <section
-          class="champion-spell-details"
-          [ngClass]="{'active': spell.selected}"
-          (click)="selectHability(listGeneralSpells[selectedSpell].spells, spell)"
-        >
-          <figure>
-            <img [src]="'../../../assets/images/spells/'+spell.image">
-          </figure>
+    <div class="container-list">
 
-          <div class="details">
-            <label>
-              <span class="champion-name"> {{spell.champion}} </span>
-              <span class="spell-name">
-                {{spell.title}}
+      <ag-virtual-scroll #vs [items]="listGeneralSpells[selectedSpell].spells" [min-row-height]="120" class="box-border">
+        <div class="demo-item" *ngFor="let spell of vs.items">
+          <section
+            class="champion-spell-details"
+            [ngClass]="{'active': spell.selected}"
+            (click)="selectHability(listGeneralSpells[selectedSpell].spells, spell)"
+          >
+            <figure>
+              <img [src]="'../../../assets/images/spells/'+spell.image">
+            </figure>
 
-                <i class="pi pi-exclamation-circle"></i>
-              </span>
-            </label>
+            <div class="details">
+              <label>
+                <span class="champion-name"> {{spell.champion}} </span>
+                <span class="spell-name">
+                  {{spell.title}}
 
-            <span class="spell-description" [innerHTML]="spell.description"></span>
-          </div>
-        </section>
-      </ng-template>
-    </p-virtualScroller>
+                  <i
+                  class="pi pi-exclamation-circle"
+                  (mouseleave)="spell.hovered = false"
+                  (mouseenter)="spell.hovered = true"
+                  ></i>
+                </span>
+              </label>
+
+              <span [ngClass]="{'hovered': spell.hovered}" class="spell-description" [innerHTML]="spell.description"></span>
+            </div>
+          </section>
+        </div>
+      </ag-virtual-scroll>
+      <!-- </ng-container> -->
+    </div>
+    <!-- <p-virtualScroller [value]="listGeneralSpells[selectedSpell].spells" scrollHeight="550px" [itemSize]="120" [lazy]="true" #el> -->
   </ng-container>
 
   <ng-template #noData>

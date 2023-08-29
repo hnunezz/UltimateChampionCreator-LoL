@@ -8,7 +8,7 @@ import { FilterService } from 'src/app/shared/services/filter-service.service';
 @Component({
   selector: 'app-spell-list',
   templateUrl: './spell-list.component.html',
-  styleUrls: ['./spell-list.component.scss']
+  styleUrls: ['./spell-list.component.scss'],
 })
 export class SpellListComponent implements OnChanges {
   @ViewChild(VirtualScroller) el: VirtualScroller;
@@ -20,6 +20,7 @@ export class SpellListComponent implements OnChanges {
   public listGeneralSpells: SpellList[] = []
 
   public get hasSpell(): boolean { return this.listGeneralSpells[this.selectedSpell].spells.length > 0; }
+
 
   constructor(
     private filterService: FilterService,

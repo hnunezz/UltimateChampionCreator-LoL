@@ -15,6 +15,7 @@ import { SpellListComponent } from './spell-list/spell-list.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { ShareChampionComponent } from './share-champion/share-champion.component';
+import { AgVirtualScrollModule } from 'ag-virtual-scroll';
 
 @NgModule({
   declarations: [CreateChampionComponent, ChampionListComponent, SpellListComponent, ShareChampionComponent],
@@ -26,7 +27,8 @@ import { ShareChampionComponent } from './share-champion/share-champion.componen
     DialogModule,
     SharedComponentsModule,
     DynamicDialogModule,
-    TooltipModule
+    TooltipModule,
+    AgVirtualScrollModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

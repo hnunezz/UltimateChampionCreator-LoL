@@ -55,6 +55,7 @@ export class ChampionsService {
           title: spell.name,
           image: spell.image.full,
           selected: false,
+          hovered: false
         });
       });
 

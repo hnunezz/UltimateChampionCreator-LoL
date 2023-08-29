@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class MainComponent {
 
-  loginOrRegister: boolean = false
+  loginOrRegister: boolean = true
 }
