@@ -43,3 +43,46 @@ div {
     left: 24px;
   }
 }
+
+
+@media only screen and (max-width: 480px) {
+  div {
+    &.P{
+      &.t4 {
+        top: 616.8px;
+        left: 36px;
+      }
+      &.t3 {
+        top: 615px;
+        left: 33px;
+      }
+      &.t2 {
+        top: 608px;
+        left: 25px;
+      }
+      &.t1 {
+        top: 606px;
+        left: 24px;
+      }
+    }
+
+    &.Q,&.W{
+      &.t4 {
+        top: 393px;
+        left: 36px;
+      }
+      &.t3 {
+        top: 391px;
+        left: 33px;
+      }
+      &.t2 {
+        top: 384px;
+        left: 25px;
+      }
+      &.t1 {
+        top: 382px;
+        left: 24px;
+      }
+    }
+  }
+}

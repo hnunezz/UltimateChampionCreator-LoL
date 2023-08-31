@@ -2,13 +2,15 @@ footer {
   height: 100%;
   background: #091428;
   align-items: center;
-  padding: 40px 100px;
+  // padding: 40px 100px;
   color: white;
   display: grid;
+  grid-auto-flow: row dense;
   grid-auto-columns: 1fr;
-  grid-auto-rows: 2fr;
-  gap: 60px 40px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 60px 0px;
+  padding: 10px 0;
 
   aside {
     i {
@@ -26,6 +28,7 @@ footer {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      padding: 10px 20px;
 
       > label {
         display: flex;
@@ -49,6 +52,7 @@ footer {
           font-size: 18px;
           line-height: 22px;
           font-family: "Inter", sans-serif;
+          width: 70%;
         }
 
         strong {
@@ -84,6 +88,20 @@ footer {
           font-size: 24px;
           line-height: 29px;
           font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  footer {
+    padding: 10px 20px;
+
+    .left {
+      label {
+        > p {
+          width: 100% !important;
         }
       }
     }

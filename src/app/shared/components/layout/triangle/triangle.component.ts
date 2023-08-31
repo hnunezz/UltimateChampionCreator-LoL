@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-triangle',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./triangle.component.scss']
 })
 export class TriangleComponent {
-
+  @Input() public type: string;
 }
