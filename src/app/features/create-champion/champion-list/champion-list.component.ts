@@ -23,16 +23,16 @@ export class ChampionListComponent {
     this.championsList = this.championService.getChampionsList();
   }
 
-  public filterChampion(event: string): void {
+  public filterChampion(event: string) {
     this.championsList = this.filterService.filterChampion(event);
   }
 
-  public selectChamp(champion: ChampionList): void {
+  public selectChamp(champion: ChampionList) {
     this.championsList.map(x => x.selected = false);
     champion.selected = !champion.selected;
   }
 
-  public handleChampionSelectChange(): void {
+  public handleChampionSelectChange() {
     const result = this.championsList.find(x => x.selected) as ChampionList;
     this.ref.close(result);
   }

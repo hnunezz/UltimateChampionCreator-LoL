@@ -12,7 +12,7 @@
           <span> {{ hasChampionSelected ? championSelected.name : 'Bem-Vindo' }} </span>
 
           <ng-container *ngIf="!loading">
-            <app-button (onClick)="show()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
+            <app-button (onClick)="showChampionList()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
           </ng-container>
         </label>
       </figure>
@@ -88,8 +88,3 @@
 <!--TODO LINKS RODAPE-->
 <!--TODO README GITHUB-->
 <!--TODO VERSAO PARA NAO RESPEITAR AS TECLAS DE HABILIDADES E PODER USAR QUAIS QUISER EM QQR POSICAO (SEM PASSIVA)-->
-
-<!--?Priority-->
-<!--TODO MOBILE VIEW-->
-<!--?Priority-->
-

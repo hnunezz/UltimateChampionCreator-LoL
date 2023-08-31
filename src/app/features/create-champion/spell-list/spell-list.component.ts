@@ -29,22 +29,22 @@ export class SpellListComponent implements OnChanges {
     this.listGeneralSpells = this.championService.getChampionsSpells();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes) {
       this.reset();
     }
   }
 
-  public selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect): void {
+  public selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect) {
     allSpells.forEach((element: SpellSelect) => element.selected = (element === spellSelected))
     this.emitSelectedSpell.emit(spellSelected)
   }
 
-  public filterSpell(event: string): void {
+  public filterSpell(event: string) {
     this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, 'championsSpells', this.selectedSpell);
   }
 
-  private reset(): void {
+  private reset() {
     this.enabled = false;
 
     this.el?.scrollToIndex(0)

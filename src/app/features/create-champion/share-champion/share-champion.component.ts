@@ -35,7 +35,7 @@ export class ShareChampionComponent {
     }).finally(() => console.log('completed download :D'))
   }
 
-  private async download(link: string): Promise<void> {
+  private async download(link: string) {
     const a = document.createElement("a");
     a.href = link;
     a.download = `UCC_${this.champion.name.toLowerCase()}.png`;
