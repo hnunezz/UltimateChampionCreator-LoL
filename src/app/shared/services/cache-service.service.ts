@@ -7,7 +7,7 @@ export class CacheService {
 
   constructor() { }
 
-  public set(key: string, value: string): void {
+  public set(key: string, value: string) {
     if (localStorage.getItem(key)) { localStorage.removeItem(key); }
 
     localStorage.setItem(key, value);
