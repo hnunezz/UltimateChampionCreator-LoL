@@ -176,7 +176,26 @@ div {
 
 //? Media Query
 
-@media only screen and (max-width: 480px) {
+@media (max-width: 480px) {
+  figure {
+    img {
+      aspect-ratio: 1/1 !important;
+      object-fit: fill !important;
+    }
+
+    label {
+      span {
+        &:first-child{
+          font-size: 1rem !important;
+
+        }
+      }
+    }
+  }
+  .gradient-container{
+    background: linear-gradient(180deg, rgba(1, 10, 19, 0) 0%, #010a13 60%) !important;
+    top: -228px !important;
+  }
   div.champion-spell-content {
     flex-direction: column !important;
     align-items: center !important;
@@ -195,27 +214,7 @@ div {
     }
   }
 
-  div.champion-spell-list{
+  div.champion-spell-list {
     width: 90% !important;
-  }
-}
-
-@media only screen and (min-width: 480px) {
-  div.champion-spell-content {
-    flex-direction: column !important;
-    align-items: center !important;
-
-    hr {
-      height: 0px !important;
-      width: 97px !important;
-    }
-
-    div.spell-keys {
-      display: grid !important;
-      grid-auto-flow: row dense;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 100px 100px;
-    }
   }
 }

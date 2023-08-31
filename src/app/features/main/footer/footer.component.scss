@@ -10,7 +10,7 @@ footer {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
   gap: 60px 0px;
-  padding: 10px 0;
+  padding: 10px 40px;
 
   aside {
     i {
@@ -94,7 +94,7 @@ footer {
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media  (max-width: 480px) {
   footer {
     padding: 10px 20px;
 

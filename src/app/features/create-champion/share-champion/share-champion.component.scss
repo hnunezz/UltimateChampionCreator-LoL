@@ -189,10 +189,68 @@ app-button {
   padding: 40px 0px;
 }
 
-@media only screen and (max-width: 480px) {
+@media  (max-width: 480px) {
   main {
     section {
       width: 90% !important;
+      ul {
+        li{
+          div.details {
+            label {
+              flex-direction: column !important;
+              gap: 0 !important;
+              align-items: flex-start !important;
+
+              span {
+                &.champion-name{
+                  font-size: 24px !important;
+                }
+
+                &.spell-name {
+                  font-size: 22px !important;
+                }
+              }
+            }
+
+            span.spell-description {
+              font-size: 16px !important;
+            }
+          }
+
+          &.gradient-container{
+            div {
+              label {
+                padding: 0px 10px !important;
+
+                span {
+                  &:first-child {
+                    font-size: 14px !important;
+
+                    strong {
+                      color: #0bc6e3;
+                      font-size: 22px  !important;
+                      font-style: normal  !important;
+                    }
+                  }
+
+                  &:last-child {
+                    font-size: 30px !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      > div {
+        p {
+          font-size: 12px !important ;
+          strong {
+            font-size: 14px !important;
+          }
+        }
+      }
     }
   }
 }

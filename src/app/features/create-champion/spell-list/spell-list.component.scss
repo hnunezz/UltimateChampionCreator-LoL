@@ -152,7 +152,6 @@ div.container-list {
           font-style: normal;
           font-size: 24px;
           color: white;
-          position: relative;
 
           &.champion-name {
             font-size: 26px;
@@ -160,19 +159,21 @@ div.container-list {
             color: #c89b3c;
           }
 
-          i {
-            position: absolute;
-            right: -29px;
-            font-size: 16px;
-            top: 7px;
-            transition: ease-out 0.3s;
-            color: #919191;
+          //!DEPRECATED
+          // i {
+          //   position: absolute;
+          //   right: -29px;
+          //   font-size: 16px;
+          //   top: 7px;
+          //   transition: ease-out 0.3s;
+          //   color: #919191;
 
-            &:hover {
-              transition: ease 0.3s;
-              color: #c89b3c;
-            }
-          }
+          //   &:hover {
+          //     transition: ease 0.3s;
+          //     color: #c89b3c;
+          //   }
+          // }
+          //!DEPRECATED
         }
       }
 
@@ -222,4 +223,54 @@ div.noData {
   align-items: center;
   font-size: 32px;
   color: #c5c5c5;
+}
+
+@media (max-width: 480px) {
+  section.champion-spell-details {
+    padding: 0px 10px !important;
+    gap: 10px !important;
+
+    figure {
+      img {
+        height: 50px !important;
+        width: 50px !important;
+      }
+    }
+    div.details {
+      label {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+
+        span {
+          &.champion-name{
+            font-size: 24px !important;
+          }
+
+          &.spell-name {
+            font-size: 22px !important;
+          }
+        }
+      }
+
+      span.spell-description{
+
+      }
+    }
+  }
+
+  .noData {
+    strong {
+      text-align: center;
+    }
+  }
+
+  app-input-text {
+    width: 90% !important;
+
+    &::ng-deep input {
+      width: 100% !important;
+      padding: 20px 10px !important;
+    }
+  }
 }

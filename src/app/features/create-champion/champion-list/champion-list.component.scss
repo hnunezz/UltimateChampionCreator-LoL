@@ -61,7 +61,7 @@ main {
       }
     }
 
-    &.noData{
+    &.noData {
       min-height: 500px;
       display: flex;
       justify-content: center;
@@ -148,3 +148,21 @@ main {
 //     background-color: rgba(65, 71, 78, 0.5);
 //   }
 // }
+
+@media (max-width: 480px) {
+  main {
+    height: 100% !important;
+    justify-content: space-between !important;
+    > div {
+      grid-template-columns: 1fr 1fr !important;
+      padding: 0 20px !important;
+      gap: 40px 20px !important;
+      max-height: 400px !important;
+      min-height: 400px !important;
+
+      section {
+        min-height: 190px !important;
+      }
+    }
+  }
+}

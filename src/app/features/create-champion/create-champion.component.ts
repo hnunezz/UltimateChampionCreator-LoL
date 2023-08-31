@@ -84,7 +84,8 @@ export class CreateChampionComponent implements OnInit {
 
   show() {
     const ref = this.dialogService.open(ChampionListComponent, {
-      width: '90%',
+      width: '100%',
+      height: '100%',
       styleClass: 'initial-heigh-modal'
     });
 
