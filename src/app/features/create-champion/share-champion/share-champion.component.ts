@@ -1,7 +1,7 @@
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
-import { ChampionList } from './../../../shared/models/spell-select';
 import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import html2canvas from 'html2canvas';
+import { Champion } from 'src/app/shared/models/champion.model';
 
 @Component({
   selector: 'app-share-champion',
@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./share-champion.component.scss']
 })
 export class ShareChampionComponent {
-  @Input() public champion: ChampionList;
+  @Input() public champion: Champion;
   @Input() public championsSelectResult: ChampionSelect;
 
   public get hasChampion(): boolean {

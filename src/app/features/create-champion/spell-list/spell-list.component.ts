@@ -19,14 +19,15 @@ export class SpellListComponent implements OnChanges {
 
   public listGeneralSpells: SpellList[] = []
 
-  public get hasSpell(): boolean { return this.listGeneralSpells[this.selectedSpell].spells.length > 0; }
+  public get hasSpell(): boolean { return true }
+  // public get hasSpell(): boolean { return this.listGeneralSpells[this.selectedSpell].spells.length > 0; }
 
 
   constructor(
     private filterService: FilterService,
     private championService: ChampionsService,
     private changeDetector: ChangeDetectorRef) {
-    this.listGeneralSpells = this.championService.getChampionsSpells();
+    // this.listGeneralSpells = this.championService.getChampionsSpells();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -41,7 +42,7 @@ export class SpellListComponent implements OnChanges {
   }
 
   public filterSpell(event: string) {
-    this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, 'championsSpells', this.selectedSpell);
+    // this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, 'championsSpells', this.selectedSpell);
   }
 
   private reset() {

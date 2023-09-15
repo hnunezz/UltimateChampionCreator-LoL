@@ -1,11 +1,11 @@
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { CacheService } from './cache-service.service';
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Champions } from '../models/champions';
-import { Observable, from, lastValueFrom, map } from 'rxjs';
 import { ResponseModel } from '../models/response-model.models';
-import { ChampionList, SpellList, SpellSelect } from '../models/spell-select';
-import { getSpellsList } from '../enums/spells';
+import { Champion } from '../models/champion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,81 +13,110 @@ import { getSpellsList } from '../enums/spells';
 export class ChampionsService {
 
   private _url = '../../../assets/data/champions-full.json';
-  private _champions: Array<Champions>;
-  // private _urlChampionsDetails = 'https://ddragon.leagueoflegends.com/cdn/13.7.1/data/en_US/champion/'; //? {champ}.json
+
+  private championsSubject = new BehaviorSubject<Champion[]>([]);
 
   constructor(
     private http: HttpClient,
     private cacheService: CacheService
   ) { }
 
-  public async getChampions() {
-    const result = await lastValueFrom(this.http.get(this._url)) as ResponseModel<Champions>;
-    this.cacheService.set('champions', JSON.stringify(result.data));
-
-    this.setChampions(JSON.stringify(result.data))
+  get champions$(): Observable<Champion[]> {
+    return this.championsSubject.asObservable();
   }
 
-  public setChampions(cached: string) {
-    this._champions = Object.values(JSON.parse(cached));
+  set champions(value: Champion[]) {
+    this.championsSubject.next(value);
   }
 
-  public getChampionsSpells(): SpellList[] {
-    const cacheKey = "championsSpells";
-    const cachedSpells = localStorage.getItem(cacheKey);
-
-    if (cachedSpells) { return JSON.parse(cachedSpells); }
-
-    const spellsList = getSpellsList();
-    const result: SpellList[] = [];
-
-    for (let i = 0; i < spellsList.length; i++) {
-      const [type, typeLabel] = spellsList[i];
-      const spells: SpellSelect[] = [];
-
-      this._champions.forEach((champ) => {
-        const spellIndex = type - 1;
-        const spell = spellIndex === -1 ? champ.passive : champ.spells[spellIndex];
-
-        spells.push({
-          champion: champ.name,
-          description: spell.description,
-          title: spell.name,
-          image: spell.image.full,
-          selected: false,
-          hovered: false
-        });
+  getChampions() {
+    this.http.get<ResponseModel<Champion[]>>(this._url)
+      .subscribe(champ => {
+        this.champions = Object
+          .values(champ.data)
+          .map(x => {
+            return {
+              id: x.key,
+              id_name: x.id,
+              key: x.key,
+              name: x.name,
+              title: x.title,
+              tiles: x.image.sprite,
+              image: x.image.full,
+              skins: x.skins,
+              lore: x.lore,
+              tags: x.tags,
+              description: x.description,
+              partype: x.partype,
+              spells: x.spells,
+              passive: x.passive,
+              selected: false,
+            }
+          })
       });
-
-      result.push({ type, typeLabel, spells });
-    }
-
-    localStorage.setItem(cacheKey, JSON.stringify(result));
-    return result;
   }
 
-  public getChampionsList(): ChampionList[] {
-    const cacheKey = "championsSelection";
-    const cachedChamps = localStorage.getItem(cacheKey);
 
-    if (cachedChamps) { return JSON.parse(cachedChamps); }
+  // public setChampions(cached: string) {
+  //   this._champions = Object.values(JSON.parse(cached));
+  // }
 
-    const result: ChampionList[] = [];
+  // public getChampionsSpells(): SpellList[] {
+  //   const cacheKey = "championsSpells";
+  //   const cachedSpells = localStorage.getItem(cacheKey);
 
-    this._champions.forEach((champ) => {
-      result.push({
-        id: champ.key,
-        id_name: champ.id,
-        name: champ.name,
-        title: champ.title,
-        description: champ.lore,
-        image: champ.image.full,
-        tiles: champ.image.sprite,
-        selected: false
-      });
-    });
+  //   if (cachedSpells) { return JSON.parse(cachedSpells); }
 
-    localStorage.setItem(cacheKey, JSON.stringify(result));
-    return result;
-  }
+  //   const spellsList = getSpellsList();
+  //   const result: SpellList[] = [];
+
+  //   for (let i = 0; i < spellsList.length; i++) {
+  //     const [type, typeLabel] = spellsList[i];
+  //     const spells: SpellSelect[] = [];
+
+  //     this._champions.forEach((champ) => {
+  //       const spellIndex = type - 1;
+  //       const spell = spellIndex === -1 ? champ.passive : champ.spells[spellIndex];
+
+  //       spells.push({
+  //         champion: champ.name,
+  //         description: spell.description,
+  //         title: spell.name,
+  //         image: spell.image.full,
+  //         selected: false,
+  //         hovered: false
+  //       });
+  //     });
+
+  //     result.push({ type, typeLabel, spells });
+  //   }
+
+  //   localStorage.setItem(cacheKey, JSON.stringify(result));
+  //   return result;
+  // }
+
+  // public getChampionsList(): ChampionList[] {
+  //   const cacheKey = "championsSelection";
+  //   const cachedChamps = localStorage.getItem(cacheKey);
+
+  //   if (cachedChamps) { return JSON.parse(cachedChamps); }
+
+  //   const result: ChampionList[] = [];
+
+  //   this._champions.forEach((champ) => {
+  //     result.push({
+  //       id: champ.key,
+  //       id_name: champ.id,
+  //       name: champ.name,
+  //       title: champ.title,
+  //       description: champ.lore,
+  //       image: champ.image.full,
+  //       tiles: champ.image.sprite,
+  //       selected: false
+  //     });
+  //   });
+
+  //   localStorage.setItem(cacheKey, JSON.stringify(result));
+  //   return result;
+  // }
 }

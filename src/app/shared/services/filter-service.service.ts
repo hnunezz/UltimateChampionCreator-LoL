@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CacheService } from './cache-service.service';
-import { ChampionList, SpellList, SpellSelect } from '../models/spell-select';
+import { Champion } from '../models/champion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,34 +9,34 @@ export class FilterService {
 
   constructor(private cacheService: CacheService) { }
 
-  public filterChampion(value: string): ChampionList[] {
+  public filterChampion(value: string): Champion[] {
     let result = [];
-    const champs = JSON.parse(this.cacheService.get('championsSelection') as string) as ChampionList[];
+    const champs = JSON.parse(this.cacheService.get('championsSelection') as string) as Champion[];
 
     if (value == '') {
       result = champs;
     } else {
       result = [
-        ...champs.filter((x: ChampionList) => { return x.name.toLowerCase().includes(value.toLowerCase()) }),
+        ...champs.filter((x: Champion) => { return x.name.toLowerCase().includes(value.toLowerCase()) }),
       ];
     }
 
     return result;
   }
 
-  public filterSpell(value: string, cache: string, selected: number): SpellSelect[] {
-    let result = [];
-    const spells = JSON.parse(this.cacheService.get(cache) as string) as SpellList[];
+  // public filterSpell(value: string, cache: string, selected: number): SpellSelect[] {
+  //   let result = [];
+  //   const spells = JSON.parse(this.cacheService.get(cache) as string) as SpellList[];
 
-    if (value == '') {
-      result = spells[selected].spells;
-    } else {
-      result = [
-        ...spells[selected].spells.filter(x => { return x.champion.toLowerCase().includes(value.toLowerCase()) }),
-        ...spells[selected].spells.filter(x => { return x.title.toLowerCase().includes(value.toLowerCase()) })
-      ];
-    }
+  //   if (value == '') {
+  //     result = spells[selected].spells;
+  //   } else {
+  //     result = [
+  //       ...spells[selected].spells.filter(x => { return x.champion.toLowerCase().includes(value.toLowerCase()) }),
+  //       ...spells[selected].spells.filter(x => { return x.title.toLowerCase().includes(value.toLowerCase()) })
+  //     ];
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 }

@@ -2,14 +2,14 @@
     <main>
       <figure [ngClass]="{'first-view': !hasChampionSelected}">
         <ng-container *ngIf="hasChampionSelected">
-          <img
+          <!-- <img
           [src]="'../../../assets/images/champions/centered/'+championSelected.id_name+'_0.jpg'"
           [alt]="championSelected.name"
-          />
+          /> -->
         </ng-container>
         <label>
-          <span> {{ hasChampionSelected ? championSelected.title : 'Ultimate Champion Creator' }} </span>
-          <span> {{ hasChampionSelected ? championSelected.name : 'Bem-Vindo' }} </span>
+          <!-- <span> {{ hasChampionSelected ? championSelected.title : 'Ultimate Champion Creator' }} </span>
+          <span> {{ hasChampionSelected ? championSelected.name : 'Bem-Vindo' }} </span> -->
 
           <ng-container *ngIf="!loading">
             <app-button (onClick)="showChampionList()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
@@ -65,20 +65,20 @@
           </div>
         </div>
 
-        <div class="champion-spell-list">
+        <!-- <div class="champion-spell-list">
           <ng-container *ngIf="!loading">
             <app-spell-list
               [selectedSpell]="selectedSpell"
               (emitSelectedSpell)="setHability($event)"
             ></app-spell-list>
           </ng-container>
-        </div>
+        </div> -->
       </section>
 
-      <app-share-champion
+      <!-- <app-share-champion
         [championsSelectResult]="championsSelectResult"
         [champion]="championSelected"
-      ></app-share-champion>
+      ></app-share-champion> -->
     </main>
 </div>
 <!--TODO FUNCIONALIDADE DE LOGIN/LOGOUT/REGISTER-->

@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
-import { Champions } from 'src/app/shared/models/champions';
-import { ResponseModel } from 'src/app/shared/models/response-model.models';
-import { ChampionList, SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
-import { CacheService } from 'src/app/shared/services/cache-service.service';
+import { Champion } from 'src/app/shared/models/champion.model';
+import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
 import { ChampionsService } from './../../shared/services/champions.service';
 import { ChampionListComponent } from './champion-list/champion-list.component';
-import { FilterService } from 'src/app/shared/services/filter-service.service';
 @Component({
   selector: 'app-create-champion',
   templateUrl: './create-champion.component.html',
@@ -20,14 +17,15 @@ export class CreateChampionComponent implements OnInit {
   public championsSelectResult: ChampionSelect;
   public listGeneralSpells: SpellList = new SpellList()
   public spellsList: Array<SpellList> = new Array<SpellList>()
-  public championSelected: ChampionList = new ChampionList();
+  public championSelected: Champion;
 
   public selectedSpell: number;
   public spellsSelectionsItems: Array<any> = [];
   public loading: boolean;
 
   public get hasChampionSelected(): boolean {
-    return this.championSelected.name !== undefined;
+    // return this.championSelected.name !== undefined;
+    return true;
   }
 
   constructor(public dialogService: DialogService, private championService: ChampionsService) {
@@ -39,15 +37,10 @@ export class CreateChampionComponent implements OnInit {
     this.loading = true;
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.loading = true;
 
-    const cachedChampions = localStorage.getItem('champions');
-    if (!cachedChampions) {
-      await this.championService.getChampions();
-    } else {
-      this.championService.setChampions(cachedChampions);
-    }
+    this.championService.getChampions();
 
     this.loading = false;
     this.setSpellsSelections();
@@ -83,7 +76,7 @@ export class CreateChampionComponent implements OnInit {
       styleClass: 'initial-heigh-modal'
     });
 
-    ref.onClose.subscribe((champion: ChampionList) => {
+    ref.onClose.subscribe((champion: Champion) => {
       if (champion) {
         this.championSelected = champion;
       }
