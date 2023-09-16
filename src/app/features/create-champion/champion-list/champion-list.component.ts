@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Component, OnInit } from '@angular/core';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Champion } from 'src/app/shared/models/champion.model';
-import { ChampionsService } from 'src/app/shared/services/champions.service';
 import { FilterService } from 'src/app/shared/services/filter-service.service';
+import { ChampionListService } from './services/champion-list.service';
 
 @Component({
   selector: 'app-champion-list',
@@ -18,11 +18,11 @@ export class ChampionListComponent implements OnInit {
   constructor(
     private filterService: FilterService,
     private ref: DynamicDialogRef,
-    private championService: ChampionsService
+    private championList: ChampionListService,
   ) { }
 
   ngOnInit(): void {
-    this.championService.champions$
+    this.championList.champions$
       .subscribe(champ => this.championsList = champ);
   }
 

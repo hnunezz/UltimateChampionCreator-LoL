@@ -13,7 +13,7 @@ export class ShareChampionComponent {
   @Input() public championsSelectResult: ChampionSelect;
 
   public get hasChampion(): boolean {
-    return this.champion.name !== undefined;
+    return this.champion?.name !== undefined;
   }
   public get disableButton(): boolean {
     return (this.championsSelectResult.spells.filter(x => x.selected == true).length === 5)

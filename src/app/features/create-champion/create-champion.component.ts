@@ -4,7 +4,7 @@ import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
 import { Champion } from 'src/app/shared/models/champion.model';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
-import { ChampionsService } from './../../shared/services/champions.service';
+import { RequestService } from './../../shared/services/champions.service';
 import { ChampionListComponent } from './champion-list/champion-list.component';
 @Component({
   selector: 'app-create-champion',
@@ -24,11 +24,10 @@ export class CreateChampionComponent implements OnInit {
   public loading: boolean;
 
   public get hasChampionSelected(): boolean {
-    // return this.championSelected.name !== undefined;
-    return true;
+    return this.championSelected?.name !== undefined;
   }
 
-  constructor(public dialogService: DialogService, private championService: ChampionsService) {
+  constructor(public dialogService: DialogService, private requestService: RequestService) {
     this.championsSelectResult = new ChampionSelect();
     this.listGeneralSpells = new SpellList()
     this.spellsList = new Array<SpellList>()
@@ -40,7 +39,7 @@ export class CreateChampionComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
 
-    this.championService.getChampions();
+    this.requestService.getChampions();
 
     this.loading = false;
     this.setSpellsSelections();

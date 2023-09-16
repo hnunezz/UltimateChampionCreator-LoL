@@ -8,7 +8,7 @@
     <div>
       <ng-container *ngFor="let champ of championsList">
         <section [ngClass]="{'active': champ.selected}" (click)="selectChamp(champ)">
-          <img [src]="'../../../../assets/images/champions/tiles/'+champ.id_name+'_0.jpg'" draggable="false">
+          <img [src]="'../../../../assets/images/champions/tiles/'+champ.id_name+'_0.jpg'" draggable="false"  [alt]="champ.name">
 
           <span> {{ champ.name }}</span>
         </section>

@@ -1,8 +1,8 @@
 <main onselectstart="return false">
   <ng-container *ngIf="enabled">
     <app-input-text
-    placeholder="Pesquise a habilidade ou campeão"
-    (modelChange)="filterSpell($event)"
+      placeholder="Pesquise a habilidade ou campeão"
+      (modelChange)="filterSpell($event)"
     ></app-input-text>
   </ng-container>
 
@@ -10,7 +10,7 @@
   <ng-container *ngIf="hasSpell; else noData">
     <div class="container-list">
 
-      <!-- <ag-virtual-scroll #vs [items]="listGeneralSpells[selectedSpell].spells" [min-row-height]="120" class="box-border">
+      <ag-virtual-scroll #vs [items]="listGeneralSpells[selectedSpell].spells" [min-row-height]="120" class="box-border">
         <div class="demo-item" *ngFor="let spell of vs.items">
           <section
             class="champion-spell-details"
@@ -18,7 +18,7 @@
             (click)="selectHability(listGeneralSpells[selectedSpell].spells, spell)"
           >
             <figure>
-              <img [src]="'../../../assets/images/spells/'+spell.image">
+              <img [src]="'../../../assets/images/spells/'+spell.image" [alt]="spell.champion">
             </figure>
 
             <div class="details">
@@ -34,7 +34,7 @@
             </div>
           </section>
         </div>
-      </ag-virtual-scroll> -->
+      </ag-virtual-scroll>
       <!-- </ng-container> -->
     </div>
     <!-- <p-virtualScroller [value]="listGeneralSpells[selectedSpell].spells" scrollHeight="550px" [itemSize]="120" [lazy]="true" #el> -->

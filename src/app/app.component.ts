@@ -1,4 +1,4 @@
-import { ChampionsService } from './shared/services/champions.service';
+import { RequestService } from './shared/services/champions.service';
 import { Component, OnInit } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Champions } from './shared/models/champions';
