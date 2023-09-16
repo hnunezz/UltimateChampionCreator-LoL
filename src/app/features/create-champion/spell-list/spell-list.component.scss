@@ -89,13 +89,28 @@ app-input-text {
   display: flex;
 }
 
-div.noData {
+div.noItem {
   min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 32px;
   color: #c5c5c5;
+}
+
+div.noData {
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #e4ac8d;
+  filter: drop-shadow(-1px 2px 14px black);
+
+  img {
+    width: 160px;
+    filter: drop-shadow(2px 4px 4px #c89b3c);
+  }
 }
 
 @media (max-width: 480px) {
@@ -116,7 +131,7 @@ div.noData {
         gap: 0 !important;
 
         span {
-          &.champion-name{
+          &.champion-name {
             font-size: 24px !important;
           }
 

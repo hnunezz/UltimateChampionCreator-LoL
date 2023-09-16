@@ -1,11 +1,12 @@
 import { Champion } from './../../../shared/models/champion.model';
 
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { VirtualScroller } from 'primeng/virtualscroller';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
 import { FilterService } from 'src/app/shared/services/filter-service.service';
 import { ChampionListService } from '../champion-list/services/champion-list.service';
+import { SpellListService } from './services/spell-list.service';
 
 @Component({
   selector: 'app-spell-list',
@@ -16,31 +17,42 @@ export class SpellListComponent implements OnChanges, OnInit {
   @ViewChild(VirtualScroller) el: VirtualScroller;
   enabled: boolean = true;
 
-  @Input() public selectedSpell: number;
   @Output() public emitSelectedSpell: EventEmitter<SpellSelect> = new EventEmitter<SpellSelect>();
 
   public listGeneralSpells: SpellList[] = []
+  public selectedSpell: number;
 
-  get hasSpell(): boolean {
-    return this.listGeneralSpells[this.selectedSpell]?.spells.length > 0;
-  }
+  public hasData: boolean = false;
 
   constructor(
     private filterService: FilterService,
     private championList: ChampionListService,
-    private changeDetector: ChangeDetectorRef) {
+    private changeDetector: ChangeDetectorRef,
+    private spellListService: SpellListService,) {
   }
 
+
   ngOnInit() {
-    this.getSpells();
+    this.hasData = false;
+
+    this.spellListService.spell$
+      .subscribe(spell => {
+        this.selectedSpell = spell as number
+        this.getSpells();
+
+        this.hasData = spell !== null;
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getSpells();
-
-    if (changes) {
-      this.reset();
-    }
+    // if (!changes) {
+    //   this.getSpells();
+    //   // this.reset();
+    // }
+    // if (changes) {
+    //   // this.reset();
+    //   this.getSpells()
+    // }
   }
 
   selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect) {
@@ -80,14 +92,9 @@ export class SpellListComponent implements OnChanges, OnInit {
               champion: champ.name,
               description: spell.description,
               title: spell.name,
-              image: spell.image.full,
+              image: spellIndex === -1 ? champ.passive.image.full : champ.spells[spellIndex].image.full,
               selected: false,
               hovered: false,
-              passive_name: champ.passive.image.full,
-              spell_name_Q: champ.spells[0].image.full,
-              spell_name_W: champ.spells[1].image.full,
-              spell_name_E: champ.spells[2].image.full,
-              spell_name_R: champ.spells[3].image.full,
             });
           })
         })
@@ -95,5 +102,6 @@ export class SpellListComponent implements OnChanges, OnInit {
     }
 
     this.listGeneralSpells = result;
+    console.log(this.listGeneralSpells)
   }
 }

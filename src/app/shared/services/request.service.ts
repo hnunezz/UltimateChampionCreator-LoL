@@ -200,7 +200,7 @@ export class RequestService {
                 name: Object.values(champ.data)[0].name,
                 title: Object.values(champ.data)[0].title,
                 tiles: `https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${Object.values(champ.data)[0].id}_0.jpg`,
-                image: `https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${Object.values(champ.data)[0].id}_0.jpg`,
+                image: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${Object.values(champ.data)[0].id}_0.jpg`,
                 skins: Object.values(champ.data)[0].skins,
                 lore: Object.values(champ.data)[0].lore,
                 tags: Object.values(champ.data)[0].tags,

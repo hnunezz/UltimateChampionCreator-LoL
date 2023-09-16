@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { getSpellsList } from 'src/app/shared/enums/spells';
@@ -6,6 +7,7 @@ import { Champion } from 'src/app/shared/models/champion.model';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
 import { RequestService } from '../../shared/services/request.service';
 import { ChampionListComponent } from './champion-list/champion-list.component';
+import { SpellListService } from './spell-list/services/spell-list.service';
 @Component({
   selector: 'app-create-champion',
   templateUrl: './create-champion.component.html',
@@ -27,7 +29,10 @@ export class CreateChampionComponent implements OnInit {
     return this.championSelected?.name !== undefined;
   }
 
-  constructor(public dialogService: DialogService, private requestService: RequestService) {
+  constructor(public dialogService: DialogService,
+    private requestService: RequestService,
+    private spellListService: SpellListService,
+  ) {
     this.championsSelectResult = new ChampionSelect();
     this.listGeneralSpells = new SpellList()
     this.spellsList = new Array<SpellList>()
@@ -48,13 +53,16 @@ export class CreateChampionComponent implements OnInit {
   private setSpellsSelections(): void {
     const spellsList = getSpellsList()
     this.spellsSelectionsItems = spellsList
-      .map(element => { return { active: false, label: element[1], key: element[0] } })
+      .map(element => { return { active: false, label: element[1], key: element[0], image: '' } })
 
-    this.spellsSelectionsItems[0].active = true;
+    // this.spellsSelectionsItems[0].active = true;
   }
 
   public selectSpell(spellActive: number): void {
     this.selectedSpell = spellActive;
+
+    this.spellListService.spell = spellActive;
+
     this.listGeneralSpells = new SpellList();
 
     const anotherSpells = this.spellsSelectionsItems.filter((x: any) => x.key != spellActive);

@@ -7,42 +7,54 @@
   </ng-container>
 
 
-  <ng-container *ngIf="hasSpell; else noData">
-    <div class="container-list">
+  <ng-container *ngIf="hasData; else noData">
+    <ng-container *ngIf="listGeneralSpells[selectedSpell].spells.length > 0; else noItem">
+      <div class="container-list">
 
-      <ag-virtual-scroll #vs [items]="listGeneralSpells[selectedSpell].spells" [min-row-height]="120" class="box-border">
-        <div class="demo-item" *ngFor="let spell of vs.items">
-          <section
-            class="champion-spell-details"
-            [ngClass]="{'active': spell.selected}"
-            (click)="selectHability(listGeneralSpells[selectedSpell].spells, spell)"
-          >
-            <figure>
-              <img [src]="'../../../assets/images/spells/'+spell.image" [alt]="spell.champion">
-            </figure>
+        <ag-virtual-scroll #vs [items]="listGeneralSpells[selectedSpell].spells" [min-row-height]="120" class="box-border">
+          <div class="demo-item" *ngFor="let spell of vs.items">
+            <section
+              class="champion-spell-details"
+              [ngClass]="{'active': spell.selected}"
+              (click)="selectHability(listGeneralSpells[selectedSpell].spells, spell)"
+            >
+              <figure>
+                <img [src]="'../../../assets/images/spells/'+spell.image" [alt]="spell.champion">
+              </figure>
 
-            <div class="details">
-              <label>
-                <span class="champion-name"> {{spell.champion}}
-                </span>
-                <span class="spell-name">
-                  {{spell.title}}
-                </span>
-              </label>
+              <div class="details">
+                <label>
+                  <span class="champion-name"> {{spell.champion}}
+                  </span>
+                  <span class="spell-name">
+                    {{spell.title}}
+                  </span>
+                </label>
 
-              <span [ngClass]="{'hovered': spell.selected}" class="spell-description" [innerHTML]="spell.description"></span>
-            </div>
-          </section>
+                <span [ngClass]="{'hovered': spell.selected}" class="spell-description" [innerHTML]="spell.description"></span>
+              </div>
+            </section>
+          </div>
+        </ag-virtual-scroll>
+      </div>
+    </ng-container>
+
+    <ng-template #noItem>
+        <div class="noItem">
+          <strong> Nenhuma informação encontrada! </strong>
         </div>
-      </ag-virtual-scroll>
-      <!-- </ng-container> -->
-    </div>
-    <!-- <p-virtualScroller [value]="listGeneralSpells[selectedSpell].spells" scrollHeight="550px" [itemSize]="120" [lazy]="true" #el> -->
+    </ng-template>
   </ng-container>
 
   <ng-template #noData>
     <div class="noData">
-      <strong> Nenhuma informação encontrada! </strong>
+      <strong> Selecione uma spell para iniciar! </strong>
+
+      <img
+        src="../../../../assets/images/utils/SummerSplit2020MissionThumbnail.png"
+        alt="SummerSplit2020MissionThumbnail.png"
+        loading="lazy"
+      >
     </div>
   </ng-template>
 </main>

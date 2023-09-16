@@ -40,6 +40,10 @@ p-dialog {
   }
 }
 
+.initial-heigh-modal {
+  max-height: 100% !important;
+}
+
 @media  (max-width: 480px) {
   .initial-heigh-modal {
     max-height: 100% !important;

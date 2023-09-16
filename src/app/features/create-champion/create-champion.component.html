@@ -28,7 +28,7 @@
             <ng-container *ngIf="championsSelectResult.spells[0]">
               <img
                 loading="lazy"
-                [src]="'https://ddragon.leagueoflegends.com/cdn/13.18.1/img/passive/'+championsSelectResult.spells[0].passive_name"
+                [src]="'https://ddragon.leagueoflegends.com/cdn/13.18.1/img/passive/'+championsSelectResult.spells[0].image"
                 [alt]="spellsSelectionsItems[0].label"
               >
             </ng-container>
@@ -51,7 +51,7 @@
                   <ng-container *ngIf="championsSelectResult.spells[i]">
                     <img
                       loading="lazy"
-                      [src]="'https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/'+championsSelectResult.spells[0].spell_name_Q"
+                      [src]="'https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/'+championsSelectResult.spells[i].image"
                       [alt]="spell.label"
                     >
                   </ng-container>
@@ -68,7 +68,6 @@
         <div class="champion-spell-list">
           <ng-container *ngIf="!loading">
             <app-spell-list
-              [selectedSpell]="selectedSpell"
               (emitSelectedSpell)="setHability($event)"
             ></app-spell-list>
           </ng-container>
