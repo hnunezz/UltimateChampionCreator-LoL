@@ -4,7 +4,7 @@ import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
 import { Champion } from 'src/app/shared/models/champion.model';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
-import { RequestService } from './../../shared/services/champions.service';
+import { RequestService } from '../../shared/services/request.service';
 import { ChampionListComponent } from './champion-list/champion-list.component';
 @Component({
   selector: 'app-create-champion',

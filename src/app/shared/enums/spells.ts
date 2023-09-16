@@ -14,12 +14,6 @@ export const spellToLabel = new Map<Spells, string>([
   [Spells.R, 'R'],
 ])
 
-export class spellListModel {
-  key: number;
-  label: string;
-  active: boolean;
-}
-
 export function getSpellsList(): Array<[number, string]> {
   let result: Array<[number, string]> = [];
 

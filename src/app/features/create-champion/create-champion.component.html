@@ -3,7 +3,7 @@
       <figure [ngClass]="{'first-view': !hasChampionSelected}">
         <ng-container *ngIf="hasChampionSelected">
           <img
-            [src]="'../../../assets/images/champions/centered/'+championSelected.id_name+'_0.jpg'"
+            [src]="championSelected.image"
             [alt]="championSelected.name"
           />
         </ng-container>
@@ -28,7 +28,7 @@
             <ng-container *ngIf="championsSelectResult.spells[0]">
               <img
                 loading="lazy"
-                [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[0].image"
+                [src]="'https://ddragon.leagueoflegends.com/cdn/13.18.1/img/passive/'+championsSelectResult.spells[0].passive_name"
                 [alt]="spellsSelectionsItems[0].label"
               >
             </ng-container>
@@ -51,7 +51,7 @@
                   <ng-container *ngIf="championsSelectResult.spells[i]">
                     <img
                       loading="lazy"
-                      [src]="'../../../assets/images/spells/'+ championsSelectResult.spells[i].image"
+                      [src]="'https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/'+championsSelectResult.spells[0].spell_name_Q"
                       [alt]="spell.label"
                     >
                   </ng-container>

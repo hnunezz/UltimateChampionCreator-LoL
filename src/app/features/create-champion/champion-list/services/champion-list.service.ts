@@ -10,7 +10,6 @@ export class ChampionListService {
 
   constructor() { }
 
-
   get champions$(): Observable<Champion[]> {
     return this.championsSubject.asObservable();
   }
@@ -18,5 +17,4 @@ export class ChampionListService {
   set champions(value: Champion[]) {
     this.championsSubject.next(value);
   }
-
 }

@@ -36,8 +36,9 @@ export class SpellListComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.getSpells();
+
     if (changes) {
-      this.getSpells();
       this.reset();
     }
   }
@@ -81,7 +82,12 @@ export class SpellListComponent implements OnChanges, OnInit {
               title: spell.name,
               image: spell.image.full,
               selected: false,
-              hovered: false
+              hovered: false,
+              passive_name: champ.passive.image.full,
+              spell_name_Q: champ.spells[0].image.full,
+              spell_name_W: champ.spells[1].image.full,
+              spell_name_E: champ.spells[2].image.full,
+              spell_name_R: champ.spells[3].image.full,
             });
           })
         })
