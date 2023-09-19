@@ -1,7 +1,6 @@
-import { RequestService } from './shared/services/request.service';
 import { Component, OnInit } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
-import { Champions } from './shared/models/champions';
+import { RequestService } from './shared/services/request.service';
+import { CacheService } from './shared/services/cache-service.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +10,13 @@ import { Champions } from './shared/models/champions';
 export class AppComponent implements OnInit {
   title = 'Ultimate Champion Creator';
 
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService,
+    private cacheService: CacheService) { }
 
   ngOnInit(): void {
-    this.requestService.getVersion()
+    const storage_api_version = this.cacheService.get('api_version')
+    if (!storage_api_version) {
+      this.requestService.getVersion();
+    }
   }
 }

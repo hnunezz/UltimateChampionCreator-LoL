@@ -1,17 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
-@import "../src/assets/base/base.scss";
-@import "../src/assets/layout/button.scss";
-@import "../src/assets/layout/scrollbar.scss";
+@import "../src/assets/scss/base/base.scss";
+@import "../src/assets/scss/layout/button.scss";
+@import "../src/assets/scss/layout/scrollbar.scss";
 
-@import "../src/assets/layout/primeng/p-virtualScroller.scss";
-@import "../src/assets/layout/primeng/p-dynamicDialog.scss";
-@import "../src/assets/layout/primeng/p-tooltip.scss";
-@import "../src/assets/layout/primeng/p-dialog.scss";
-
-
+@import "../src/assets/scss/layout/primeng/p-virtualScroller.scss";
+@import "../src/assets/scss/layout/primeng/p-dynamicDialog.scss";
+@import "../src/assets/scss/layout/primeng/p-tooltip.scss";
+@import "../src/assets/scss/layout/primeng/p-dialog.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;1,400;1,500&family=Roboto+Condensed:ital,wght@0,400;0,700;1,300&display=swap");
-
-

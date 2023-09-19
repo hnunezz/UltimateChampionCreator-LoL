@@ -1,4 +1,4 @@
-[
+export const all_champions = [
   "Aatrox",
   "Ahri",
   "Akali",

@@ -1,6 +1,14 @@
-import { ImageModel } from "./image.model";
-import { SkinsModel } from "./skins.model";
-import { SpellModel } from "./spell.model";
+export class SpellModel {
+  id: string;
+  name: string;
+  description: string;
+  image: ImageModel;
+}
+
+export class ImageModel {
+  full: string
+  sprite: string
+}
 
 export interface Champion {
   id: string;
@@ -9,7 +17,7 @@ export interface Champion {
   name: string;
   title: string;
   image: ImageModel | any;
-  skins: Array<SkinsModel>;
+  skins: Array<any>;
   lore: string;
   tags: [string, string];
   description: string;

@@ -1,5 +1,4 @@
 import { Spells } from "../enums/spells";
-import { SpellModel } from "./spell.model";
 
 export class SpellSelect {
   champion: string
