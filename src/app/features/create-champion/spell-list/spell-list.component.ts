@@ -13,7 +13,7 @@ import { SpellListService } from './services/spell-list.service';
   templateUrl: './spell-list.component.html',
   styleUrls: ['./spell-list.component.scss'],
 })
-export class SpellListComponent implements OnChanges, OnInit {
+export class SpellListComponent implements OnInit {
   @ViewChild(VirtualScroller) el: VirtualScroller;
   enabled: boolean = true;
 
@@ -44,17 +44,6 @@ export class SpellListComponent implements OnChanges, OnInit {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // if (!changes) {
-    //   this.getSpells();
-    //   // this.reset();
-    // }
-    // if (changes) {
-    //   // this.reset();
-    //   this.getSpells()
-    // }
-  }
-
   selectHability(allSpells: Array<SpellSelect>, spellSelected: SpellSelect) {
     allSpells.forEach((element: SpellSelect) => element.selected = (element === spellSelected))
     this.emitSelectedSpell.emit(spellSelected)
@@ -62,16 +51,6 @@ export class SpellListComponent implements OnChanges, OnInit {
 
   filterSpell(event: string) {
     this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, 'championsSpells', this.selectedSpell);
-  }
-
-  private reset() {
-    this.enabled = false;
-
-    this.el?.scrollToIndex(0)
-    this.filterSpell('');
-    this.changeDetector.detectChanges();
-
-    this.enabled = true;
   }
 
   private getSpells() {
@@ -102,6 +81,6 @@ export class SpellListComponent implements OnChanges, OnInit {
     }
 
     this.listGeneralSpells = result;
-    console.log(this.listGeneralSpells)
+
   }
 }

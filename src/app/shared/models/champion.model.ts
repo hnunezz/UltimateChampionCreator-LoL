@@ -22,8 +22,8 @@ export interface Champion {
   tags: [string, string];
   description: string;
   partype: string;
-  spells: Array<SpellModel>;
-  passive: SpellModel;
   tiles: string;
   selected: boolean;
+  spells: Array<SpellModel>;
+  passive: SpellModel;
 }

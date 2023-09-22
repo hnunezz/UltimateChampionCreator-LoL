@@ -2,7 +2,7 @@
   <section id="capture">
     <ul>
       <ng-container *ngIf="hasChampion; else firstView">
-        <img [src]="'../../../assets/images/champions/splash/'+champion.id_name+'_0.jpg'" [alt]="champion.id_name">
+        <img [src]="champion.image" [alt]="champion.id_name" loading="lazy">
       </ng-container>
 
       <ng-template #firstView>
@@ -25,7 +25,7 @@
       <ng-container *ngFor="let spell of championsSelectResult?.spells">
         <li class="champion-spell-details" [ngClass]="{'noData': !spell?.selected}">
           <figure>
-            <img [src]="!spell?.selected ? '../../../assets/images/utils/no-selected.png' : '../../../assets/images/spells/'+spell?.image" [alt]="!spell?.selected ? '?' : spell?.champion">
+            <img loading="lazy" [src]="!spell?.selected ? '../../../assets/images/utils/no-selected.png' : spell.image" [alt]="!spell?.selected ? '?' : spell?.champion">
           </figure>
 
           <div class="details">

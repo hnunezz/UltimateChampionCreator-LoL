@@ -109,11 +109,17 @@ div.noData {
 
   img {
     width: 160px;
+    height: 160px;
     filter: drop-shadow(2px 4px 4px #c89b3c);
   }
 }
 
 @media (max-width: 480px) {
+  div.noData {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
   section.champion-spell-details {
     padding: 0px 10px !important;
     gap: 10px !important;

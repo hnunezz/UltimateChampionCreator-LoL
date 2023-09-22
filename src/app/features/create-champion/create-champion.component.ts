@@ -73,6 +73,7 @@ export class CreateChampionComponent implements OnInit {
   }
 
   public setHability(event: SpellSelect): void {
+    console.log(event)
     this.championsSelectResult.spells[this.selectedSpell] = event;
   }
 

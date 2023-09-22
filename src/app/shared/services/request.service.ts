@@ -35,6 +35,7 @@ export class RequestService {
           this.http
             .get<ResponseModel<Champion[]>>(_url(version, name))
             .subscribe(champ => {
+
               const champion: Champion = {
                 id: Object.values(champ.data)[0].key,
                 id_name: Object.values(champ.data)[0].id,
@@ -50,9 +51,19 @@ export class RequestService {
                 partype: Object.values(champ.data)[0].partype,
                 spells: Object.values(champ.data)[0].spells,
                 passive: Object.values(champ.data)[0].passive,
-                // passive: `https://ddragon.leagueoflegends.com/cdn/13.18.1/img/passive/${Object.values(champ.data)[0].id}_P.png`,
                 selected: false,
               }
+
+              //* FiddleSticks valid image *//
+              if (champion.key == '9') {
+                champion.tiles = `https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/FiddleSticks_0.jpg`
+              }
+              //* FiddleSticks valid image *//
+
+              //* Unique rules for Passive and Spells  *//
+              champion.passive.image.full = `https://ddragon.leagueoflegends.com/cdn/13.18.1/img/passive/${champion.passive.image.full}`
+              champion.spells.map(c => c.image.full = `https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/${c.image.full}`);
+              //* Unique rules for Passive and Spells *//
 
               result.push(champion);
 

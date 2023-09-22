@@ -19,7 +19,10 @@
               (click)="selectHability(listGeneralSpells[selectedSpell].spells, spell)"
             >
               <figure>
-                <img [src]="'../../../assets/images/spells/'+spell.image" [alt]="spell.champion">
+                <img
+                  [src]="spell.image"
+                  [alt]="spell.champion"
+                >
               </figure>
 
               <div class="details">
