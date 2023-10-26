@@ -7,6 +7,7 @@ import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
 import { FilterService } from 'src/app/shared/services/filter-service.service';
 import { ChampionListService } from '../champion-list/services/champion-list.service';
 import { SpellListService } from './services/spell-list.service';
+import { CacheService } from 'src/app/shared/services/cache-service.service';
 
 @Component({
   selector: 'app-spell-list',
@@ -23,12 +24,14 @@ export class SpellListComponent implements OnInit {
   public selectedSpell: number;
 
   public hasData: boolean = false;
+  private STORAGE_KEY = 'spells';
 
   constructor(
     private filterService: FilterService,
     private championList: ChampionListService,
     private changeDetector: ChangeDetectorRef,
-    private spellListService: SpellListService,) {
+    private spellListService: SpellListService,
+    private cacheService: CacheService) {
   }
 
 
@@ -50,7 +53,7 @@ export class SpellListComponent implements OnInit {
   }
 
   filterSpell(event: string) {
-    this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, 'championsSpells', this.selectedSpell);
+    this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, this.STORAGE_KEY, this.selectedSpell);
   }
 
   private getSpells() {
@@ -80,6 +83,7 @@ export class SpellListComponent implements OnInit {
       result.push({ type, typeLabel, spells });
     }
 
+    this.cacheService.set(this.STORAGE_KEY, JSON.stringify(result));
     this.listGeneralSpells = result;
 
   }
