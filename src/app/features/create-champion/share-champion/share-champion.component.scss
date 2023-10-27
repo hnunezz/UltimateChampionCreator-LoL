@@ -5,7 +5,7 @@ main {
   align-items: center;
 
   section {
-    width: 70%;
+    width: 50%;
     background: #091428;
     border: 1px solid #c89b3c;
     border-radius: 4px;
@@ -15,7 +15,7 @@ main {
     cursor: default !important;
 
     > img {
-      aspect-ratio: 3/1;
+      aspect-ratio: 2/1;
       object-fit: fill;
     }
 
@@ -26,7 +26,7 @@ main {
 
     ul {
       > img {
-        aspect-ratio: 3/1;
+        aspect-ratio: 2/1;
         object-fit: fill;
         width: 100%;
       }
@@ -92,7 +92,7 @@ main {
           display: flex;
           gap: 20px;
           justify-content: flex-start;
-          align-items: flex-start;
+          align-items: center;
           flex-direction: row;
 
           figure {
@@ -192,6 +192,10 @@ app-button {
 @media  (max-width: 480px) {
   main {
     section {
+      > img {
+        aspect-ratio: 1/1 !important;
+      }
+
       width: 90% !important;
       ul {
         li{
@@ -235,6 +239,7 @@ app-button {
 
                   &:last-child {
                     font-size: 30px !important;
+                    white-space: pre-line;
                   }
                 }
               }

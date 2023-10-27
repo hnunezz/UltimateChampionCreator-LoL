@@ -34,7 +34,7 @@
               <span class="spell-name"> {{ !spell?.selected ? '?' : spell?.title}} </span>
             </label>
 
-            <span class="spell-description" [innerHTML]="!spell?.selected ? '- - -' : spell?.description"></span>
+            <!-- <span class="spell-description" [innerHTML]="!spell?.selected ? '- - -' : spell?.description"></span> -->
           </div>
         </li>
       </ng-container>
@@ -47,7 +47,7 @@
 
     <app-button
       styleClass="btn-primary"
-      label="COMPARTILHE SEU CAMPEÃO"
+      label="COMPARTILHE"
       [disable]="!disableButton"
       (onClick)="share()"
     ></app-button>

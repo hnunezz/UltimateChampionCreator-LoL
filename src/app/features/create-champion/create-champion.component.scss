@@ -172,6 +172,24 @@ div {
         flex-direction: column;
       }
     }
+
+   > hr {
+      display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid #091428;
+      margin: 5em 146px;
+      padding: 0;
+    }
+
+    > h1 {
+      font-family: "Caudex", serif;
+      color: #c89b3c;
+      text-align: center;
+      font-size: 38px;
+      font-weight: bold;
+      font-style: italic;
+    }
   }
 }
 
@@ -185,15 +203,18 @@ div {
 
     label {
       span {
-        &:first-child{
+        &:first-child {
           font-size: 1rem !important;
-
         }
       }
     }
   }
-  .gradient-container{
-    background: linear-gradient(180deg, rgba(1, 10, 19, 0) 0%, #010a13 60%) !important;
+  .gradient-container {
+    background: linear-gradient(
+      180deg,
+      rgba(1, 10, 19, 0) 0%,
+      #010a13 60%
+    ) !important;
     top: -228px !important;
   }
   div.champion-spell-content {

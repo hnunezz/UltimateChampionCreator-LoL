@@ -73,7 +73,6 @@ export class CreateChampionComponent implements OnInit {
   }
 
   public setHability(event: SpellSelect): void {
-    console.log(event)
     this.championsSelectResult.spells[this.selectedSpell] = event;
   }
 
@@ -87,6 +86,7 @@ export class CreateChampionComponent implements OnInit {
     ref.onClose.subscribe((champion: Champion) => {
       if (champion) {
         this.championSelected = champion;
+        console.log(champion)
       }
     })
   }
