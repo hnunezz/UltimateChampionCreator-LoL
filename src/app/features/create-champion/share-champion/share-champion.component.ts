@@ -25,16 +25,16 @@ export class ShareChampionComponent {
   public share(): void {
 
     console.log(this.champion)
-    // html2canvas(this.el.nativeElement.querySelector("#capture")).then(async canvas => {
-    //   const link = canvas.toDataURL("image/png");
+    html2canvas(this.el.nativeElement.querySelector("#capture")).then(async canvas => {
+      const link = canvas.toDataURL("image/png");
 
-    //   this.el.nativeElement.querySelector("#display-for-canvas").appendChild(canvas)
+      this.el.nativeElement.querySelector("#display-for-canvas").appendChild(canvas)
 
-    //   const container = this.el.nativeElement.querySelector("#display-for-generate-print");
-    //   container.innerHTML = '<img src="' + link + '" />'
+      const container = this.el.nativeElement.querySelector("#display-for-generate-print");
+      container.innerHTML = '<img src="' + link + '" />'
 
-    //   this.download(link)
-    // }).finally(() => console.log('completed download :D'))
+      this.download(link)
+    }).finally(() => console.log('completed download :D'))
   }
 
   private async download(link: string) {

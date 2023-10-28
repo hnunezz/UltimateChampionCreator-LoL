@@ -99,7 +99,7 @@ div.noItem {
 }
 
 div.noData {
-  min-height: 500px;
+  height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,7 +114,7 @@ div.noData {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 840px) {
   div.noData {
     flex-direction: column;
     padding: 0 10px;

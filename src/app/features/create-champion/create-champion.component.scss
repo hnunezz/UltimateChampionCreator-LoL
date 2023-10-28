@@ -194,7 +194,7 @@ div {
 }
 
 //? Media Query
-@media (max-width: 480px) {
+@media (max-width: 750px) {
   figure {
     img {
       aspect-ratio: 1/1 !important;
@@ -232,6 +232,52 @@ div {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       gap: 100px 100px;
+    }
+  }
+
+  div.champion-spell-list {
+    width: 90% !important;
+  }
+}
+
+@media (min-width: 751px) and (max-width: 1380px) {
+  figure {
+    img {
+      aspect-ratio: 1/1 !important;
+      object-fit: fill !important;
+    }
+
+    label {
+      span {
+        &:first-child {
+          font-size: 1rem !important;
+        }
+      }
+    }
+  }
+  .gradient-container {
+    background: linear-gradient(
+      180deg,
+      rgba(1, 10, 19, 0) 0%,
+      #010a13 60%
+    ) !important;
+    top: -228px !important;
+  }
+  div.champion-spell-content {
+    flex-direction: column !important;
+    align-items: center !important;
+
+    hr {
+      height: 0px !important;
+      width: 97px !important;
+    }
+
+    div.spell-keys {
+      display: grid !important;
+      grid-auto-flow: row dense;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 109px 300px !important;
     }
   }
 

@@ -1,13 +1,10 @@
 <main onselectstart="return false">
-  <ng-container *ngIf="enabled">
+  <ng-container *ngIf="hasData; else noData">
     <app-input-text
       placeholder="Pesquise a habilidade ou campeão"
       (modelChange)="filterSpell($event)"
     ></app-input-text>
-  </ng-container>
 
-
-  <ng-container *ngIf="hasData; else noData">
     <ng-container *ngIf="listGeneralSpells[selectedSpell].spells.length > 0; else noItem">
       <div class="container-list">
 

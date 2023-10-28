@@ -16,7 +16,6 @@ import { CacheService } from 'src/app/shared/services/cache-service.service';
 })
 export class SpellListComponent implements OnInit {
   @ViewChild(VirtualScroller) el: VirtualScroller;
-  enabled: boolean = true;
 
   @Output() public emitSelectedSpell: EventEmitter<SpellSelect> = new EventEmitter<SpellSelect>();
 
