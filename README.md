@@ -41,12 +41,6 @@ This project is based on the official Data Dragon documentation
 
 - [@hnunezz](https://www.linkedin.com/in/henrique-nunes-de-almeida-ba897a1aa/)
 
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-
 ## Contributions
 
 coming soon ...
