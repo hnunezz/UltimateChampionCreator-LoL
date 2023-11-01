@@ -1,4 +1,4 @@
-<main >
+<main>
   <section id="capture">
     <ul>
       <ng-container *ngIf="hasChampion; else firstView">
@@ -12,11 +12,19 @@
       <li class="gradient-container">
         <div>
           <label>
-            <span>
-              {{ hasChampion ? 'O Campeão Perfeito de' : 'Nenhum Campeão Selecionado!' }}
-              <strong>{{ hasChampion ? 'Henrique Nunes' : '- - -' }}</strong>
-            </span>
+            <ng-container *ngIf="hasChampion; else notChampionSelect">
+              <span>
+                O Campeão Perfeito de
+                <strong>Henrique Nunes</strong>
+              </span>
 
+            </ng-container>
+            <ng-template #notChampionSelect>
+              <span>
+                Nenhum Campeão Selecionado!
+                <strong> - - - </strong>
+              </span>
+            </ng-template>
             <span>{{hasChampion ? champion.name : ''}}</span>
           </label>
         </div>
@@ -25,7 +33,8 @@
       <ng-container *ngFor="let spell of championsSelectResult?.spells">
         <li class="champion-spell-details" [ngClass]="{'noData': !spell?.selected}">
           <figure>
-            <img loading="lazy" [src]="!spell?.selected ? '../../../assets/images/utils/no-selected.png' : spell.image" [alt]="!spell?.selected ? '?' : spell?.champion">
+            <img loading="lazy" [src]="!spell?.selected ? '../../../assets/images/utils/no-selected.png' : spell.image"
+              [alt]="!spell?.selected ? '?' : spell?.champion">
           </figure>
 
           <div class="details">
@@ -41,16 +50,12 @@
     </ul>
 
     <div style="height: 50px;  display: flex; align-items: center; justify-content: center;">
-      <p style="color: #ffffff;font-weight: 100;font-size: 18px;">Feito com: <strong style="color: #0bc6e3;font-weight: 900;font-size: 24px;">www.linkdosite.com.br</strong></p>
+      <p style="color: #ffffff;font-weight: 100;font-size: 18px;">Feito com: <strong
+          style="color: #0bc6e3;font-weight: 900;font-size: 24px;">www.linkdosite.com.br</strong></p>
     </div>
   </section>
 
-    <app-button
-      styleClass="btn-primary"
-      label="COMPARTILHE"
-      [disable]="!disableButton"
-      (onClick)="share()"
-    ></app-button>
+  <app-button styleClass="btn-primary" label="COMPARTILHE" [disable]="!disableButton" (onClick)="share()"></app-button>
 </main>
 
 <div id="display-for-canvas" style="display: none;"></div>

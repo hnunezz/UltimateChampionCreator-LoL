@@ -26,6 +26,8 @@ export class RequestService {
     let result: Champion[] = [];
     let version = this.cacheService.get('api_version') as string;
 
+    let URL_KEY = `https://ddragon.leagueoflegends.com/cdn`;
+
     all_champions
       .sort()
       .forEach(name => {
@@ -42,8 +44,8 @@ export class RequestService {
                 key: Object.values(champ.data)[0].key,
                 name: Object.values(champ.data)[0].name,
                 title: Object.values(champ.data)[0].title,
-                tiles: `https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${Object.values(champ.data)[0].id}_0.jpg`,
-                image: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${Object.values(champ.data)[0].id}_0.jpg`,
+                tiles: `${URL_KEY}/img/champion/tiles/${Object.values(champ.data)[0].id}_0.jpg`,
+                image: `${URL_KEY}/img/champion/splash/${Object.values(champ.data)[0].id}_0.jpg`,
                 skins: Object.values(champ.data)[0].skins,
                 lore: Object.values(champ.data)[0].lore,
                 tags: Object.values(champ.data)[0].tags,
@@ -56,13 +58,13 @@ export class RequestService {
 
               //* FiddleSticks valid image *//
               if (champion.key == '9') {
-                champion.tiles = `https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/FiddleSticks_0.jpg`
+                champion.tiles = `${URL_KEY}/img/champion/tiles/FiddleSticks_0.jpg`
               }
               //* FiddleSticks valid image *//
 
               //* Unique rules for Passive and Spells  *//
-              champion.passive.image.full = `https://ddragon.leagueoflegends.com/cdn/13.18.1/img/passive/${champion.passive.image.full}`
-              champion.spells.map(c => c.image.full = `https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/${c.image.full}`);
+              champion.passive.image.full = `${URL_KEY}/${version}/img/passive/${champion.passive.image.full}`
+              champion.spells.map(c => c.image.full = `${URL_KEY}/${version}/img/spell/${c.image.full}`);
               //* Unique rules for Passive and Spells *//
 
               result.push(champion);
