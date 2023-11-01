@@ -37,7 +37,7 @@ This project is based on the official Data Dragon documentation
 - PrimeNG (UI Component)
 
 
-## Autores
+## Authors
 
 - [@hnunezz](https://www.linkedin.com/in/henrique-nunes-de-almeida-ba897a1aa/)
 
