@@ -19,7 +19,7 @@
     "@angular/platform-browser": "17.3.3",
     "@angular/platform-browser-dynamic": "17.3.3",
     "@angular/router": "17.3.3",
-    "ag-virtual-scroll": "^1.7.0",
+    "ag-virtual-scroll": "^1.8.0",
     "html2canvas": "^1.4.1",
     "primeicons": "^6.0.1",
     "primeng": "^17.3.3",
@@ -28,7 +28,7 @@
     "zone.js": "^0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.2.13",
+    "@angular-devkit/build-angular": "^17.3.3",
     "@angular/cli": "~16.2.13",
     "@angular/compiler-cli": "17.3.3",
     "@types/jasmine": "~4.3.0",
