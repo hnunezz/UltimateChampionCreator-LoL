@@ -21,7 +21,7 @@
         >
       </div>
 
-      <ng-container *ngIf="!isLogin">
+      @if(!isLogin) {
         <div [ngClass]="{'active': confirmPassword}">
           <p>Confirmar Senha</p>
           <input
@@ -30,7 +30,8 @@
             [(ngModel)]="confirmPassword"
           >
         </div>
-      </ng-container>
+      }
+
       <app-button
         styleClass="btn-primary"
         [label]="isLogin

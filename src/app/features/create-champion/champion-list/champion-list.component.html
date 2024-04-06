@@ -4,22 +4,21 @@
     (modelChange)="filterChampion($event)"
   ></app-input-text>
 
-  <ng-container *ngIf="hasChampion; else noData">
+  @if (hasChampion) {
     <div>
-      <ng-container *ngFor="let champ of championsList">
+      @for(champ of championsList; track champ.name) {
         <section [ngClass]="{'active': champ.selected}" (click)="selectChamp(champ)">
           <img [src]="champ.tiles" draggable="false" [alt]="champ.name">
           <span> {{ champ.name }}</span>
         </section>
-      </ng-container>
+      }
     </div>
-  </ng-container>
-
-  <ng-template #noData>
+  }
+  @else {
     <div class="noData">
       <strong> Nenhuma informação encontrada! </strong>
     </div>
-  </ng-template>
+  }
 
   <footer>
     <app-button

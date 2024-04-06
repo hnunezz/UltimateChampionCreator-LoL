@@ -31,5 +31,6 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "strictPropertyInitialization": false,
+    "_enabledBlockTypes": ["if","for","switch","defer"]
   }
 }

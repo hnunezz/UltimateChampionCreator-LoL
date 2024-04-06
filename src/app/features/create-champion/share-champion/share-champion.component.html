@@ -1,52 +1,52 @@
 <main>
   <section id="capture">
     <ul>
-      <ng-container *ngIf="hasChampion; else firstView">
+      @if (hasChampion) {
         <img [src]="champion.image" [alt]="champion.id_name" loading="lazy">
-      </ng-container>
-
-      <ng-template #firstView>
+      }
+      @else {
         <div class="firstView"></div>
-      </ng-template>
+      }
 
       <li class="gradient-container">
         <div>
           <label>
-            <ng-container *ngIf="hasChampion; else notChampionSelect">
+            @if (hasChampion) {
               <span>
                 O Campeão Perfeito de
                 <strong>Henrique Nunes</strong>
               </span>
-
-            </ng-container>
-            <ng-template #notChampionSelect>
+            }
+            @else {
               <span>
                 Nenhum Campeão Selecionado!
                 <strong> - - - </strong>
               </span>
-            </ng-template>
+            }
             <span>{{hasChampion ? champion.name : ''}}</span>
           </label>
         </div>
       </li>
 
-      <ng-container *ngFor="let spell of championsSelectResult?.spells">
-        <li class="champion-spell-details" [ngClass]="{'noData': !spell?.selected}">
-          <figure>
-            <img loading="lazy" [src]="!spell?.selected ? '../../../assets/images/utils/no-selected.png' : spell.image"
-              [alt]="!spell?.selected ? '?' : spell?.champion">
-          </figure>
+      @if (hasChampion) {
+        @for (spell of championsSelectResult.spells; track spell.image) {
+          <li class="champion-spell-details" [ngClass]="{'noData': !spell?.selected}">
+            <figure>
+              <img loading="lazy" [src]="!spell?.selected ? '../../../assets/images/utils/no-selected.png' : spell.image"
+                [alt]="!spell?.selected ? '?' : spell?.champion">
+            </figure>
 
-          <div class="details">
-            <label>
-              <span class="champion-name"> {{ !spell?.selected ? '?' : spell?.champion }} </span>
-              <span class="spell-name"> {{ !spell?.selected ? '?' : spell?.title}} </span>
-            </label>
+            <div class="details">
+              <label>
+                <span class="champion-name"> {{ !spell?.selected ? '?' : spell?.champion }} </span>
+                <span class="spell-name"> {{ !spell?.selected ? '?' : spell?.title}} </span>
+              </label>
 
-            <!-- <span class="spell-description" [innerHTML]="!spell?.selected ? '- - -' : spell?.description"></span> -->
-          </div>
-        </li>
-      </ng-container>
+              <!-- <span class="spell-description" [innerHTML]="!spell?.selected ? '- - -' : spell?.description"></span> -->
+            </div>
+          </li>
+        }
+      }
     </ul>
 
     <div style="height: 50px;  display: flex; align-items: center; justify-content: center;">

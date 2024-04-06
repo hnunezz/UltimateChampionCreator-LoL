@@ -1,11 +1,11 @@
 <main onselectstart="return false">
-  <ng-container *ngIf="hasData; else noData">
+  @if (hasData) {
     <app-input-text
       placeholder="Pesquise a habilidade ou campeão"
       (modelChange)="filterSpell($event)"
     ></app-input-text>
 
-    <ng-container *ngIf="listGeneralSpells[selectedSpell].spells.length > 0; else noItem">
+    @if (listGeneralSpells[selectedSpell].spells.length > 0) {
       <div class="container-list">
 
         <ag-virtual-scroll #vs [items]="listGeneralSpells[selectedSpell].spells" [min-row-height]="120" class="box-border">
@@ -37,16 +37,14 @@
           </div>
         </ag-virtual-scroll>
       </div>
-    </ng-container>
-
-    <ng-template #noItem>
-        <div class="noItem">
-          <strong> Nenhuma informação encontrada! </strong>
-        </div>
-    </ng-template>
-  </ng-container>
-
-  <ng-template #noData>
+    }
+    @else {
+      <div class="noItem">
+        <strong> Nenhuma informação encontrada! </strong>
+      </div>
+    }
+  }
+  @else {
     <div class="noData">
       <strong> Selecione uma Habilidade para iniciar! </strong>
 
@@ -56,5 +54,5 @@
         loading="lazy"
       >
     </div>
-  </ng-template>
+  }
 </main>

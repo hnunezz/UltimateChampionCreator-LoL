@@ -1,19 +1,19 @@
 <div onselectstart="return false">
     <main>
       <figure [ngClass]="{'first-view': !hasChampionSelected}">
-        <ng-container *ngIf="hasChampionSelected">
-          <img
-            [src]="championSelected.image"
-            [alt]="championSelected.name"
-          />
-        </ng-container>
+          @if(hasChampionSelected) {
+            <img
+              [src]="championSelected.image"
+              [alt]="championSelected.name"
+            />
+          }
         <label>
           <span> {{ hasChampionSelected ? championSelected.title : 'Ultimate Champion Creator' }} </span>
           <span> {{ hasChampionSelected ? championSelected.name : 'Bem-Vindo' }} </span>
 
-          <ng-container *ngIf="!loading">
+          @if (!loading) {
             <app-button (onClick)="showChampionList()" styleClass="btn-primary" label="TROCAR CAMPEÃO"></app-button>
-          </ng-container>
+          }
         </label>
       </figure>
 
@@ -25,14 +25,13 @@
             [ngClass]="{'active': spellsSelectionsItems[0].active}"
             (click)="selectSpell(spellsSelectionsItems[0].key)">
 
-            <ng-container *ngIf="championsSelectResult.spells[0]">
-              <img
-                loading="lazy"
-                [src]="championsSelectResult.spells[0].image"
-                [alt]="spellsSelectionsItems[0].label"
-              >
-            </ng-container>
-
+              @if (championsSelectResult.spells[0]) {
+                <img
+                  loading="lazy"
+                  [src]="championsSelectResult.spells[0].image"
+                  [alt]="spellsSelectionsItems[0].label"
+                >
+              }
             <strong>{{ spellsSelectionsItems[0].label }}</strong>
 
             <app-triangle [type]="spellsSelectionsItems[0].label"></app-triangle>
@@ -41,36 +40,37 @@
           <hr>
 
           <div class="spell-keys">
-            <ng-container *ngFor="let spell of spellsSelectionsItems; let i = index">
-              <ng-container *ngIf="i > 0">
+            @for(spell of spellsSelectionsItems; track spell.key; let idx = $index){
+              @if (idx > 0) {
                 <div
                   class="champion-spell-content_{{spell.label}}"
                   [ngClass]="{'active': spell.active}"
-                  (click)="selectSpell(spell.key); ">
+                  (click)="selectSpell(spell.key); "
+                >
 
-                  <ng-container *ngIf="championsSelectResult.spells[i]">
+                  @if (championsSelectResult.spells[idx]) {
                     <img
                       loading="lazy"
-                      [src]="championsSelectResult.spells[i].image"
+                      [src]="championsSelectResult.spells[idx].image"
                       [alt]="spell.label"
                     >
-                  </ng-container>
+                  }
 
                   <strong>{{ spell.label }}</strong>
 
                   <app-triangle [type]="spell.label"></app-triangle>
                 </div>
-              </ng-container>
-            </ng-container>
+              }
+            }
           </div>
         </div>
 
         <div class="champion-spell-list">
-          <ng-container *ngIf="!loading">
+          @if (!loading) {
             <app-spell-list
               (emitSelectedSpell)="setHability($event)"
             ></app-spell-list>
-          </ng-container>
+          }
         </div>
       </section>
 
@@ -91,3 +91,6 @@
 <!--TODO LINKS RODAPE-->
 <!--TODO README GITHUB-->
 <!--TODO VERSAO PARA NAO RESPEITAR AS TECLAS DE HABILIDADES E PODER USAR QUAIS QUISER EM QQR POSICAO (SEM PASSIVA)-->
+
+
+<!--! FAZER ALTERAÇOES PARA ADICIONAR SIGNALS -->
