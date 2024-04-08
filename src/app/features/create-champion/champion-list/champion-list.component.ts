@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Champion } from 'src/app/shared/models/champion.model';
 import { FilterService } from 'src/app/shared/services/filter-service.service';
@@ -10,20 +10,22 @@ import { ChampionListService } from './services/champion-list.service';
   styleUrls: ['./champion-list.component.scss']
 })
 export class ChampionListComponent implements OnInit {
-  public championsList: Champion[] = [];
+  private filterService = inject(FilterService);
+  private ref = inject(DynamicDialogRef);
+  private championList = inject(ChampionListService);
 
-  public get hasChampion(): boolean { return this.championsList.length > 0; }
-  public get hasChampionSelect(): boolean { return !this.championsList.some(x => x.selected == true) }
+  championsList: Champion[] = [];
 
-  constructor(
-    private filterService: FilterService,
-    private ref: DynamicDialogRef,
-    private championList: ChampionListService,
-  ) { }
+  get hasChampion(): boolean { return this.championsList.length > 0; }
+  get hasChampionSelect(): boolean { return !this.championsList.some(x => x.selected == true) }
 
-  ngOnInit(): void {
-    this.championList.champions$
-      .subscribe(champ => this.championsList = champ);
+  async ngOnInit() {
+    await this.handleChampions();
+  }
+
+  private async handleChampions() {
+    const result = await this.championList.champions$
+    result.subscribe(champ => this.championsList = champ);
   }
 
   filterChampion(event: string) {

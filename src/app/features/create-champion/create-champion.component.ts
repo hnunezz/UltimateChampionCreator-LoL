@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
@@ -15,24 +15,24 @@ import { SpellListService } from './spell-list/services/spell-list.service';
   providers: [DialogService]
 })
 export class CreateChampionComponent implements OnInit {
+  dialogService = inject(DialogService);
+  private requestService = inject(RequestService);
+  private spellListService = inject(SpellListService);
 
-  public championsSelectResult: ChampionSelect;
-  public listGeneralSpells: SpellList = new SpellList()
-  public spellsList: Array<SpellList> = new Array<SpellList>()
-  public championSelected: Champion;
+  championsSelectResult: ChampionSelect;
+  listGeneralSpells: SpellList = new SpellList()
+  spellsList: Array<SpellList> = new Array<SpellList>()
+  championSelected: Champion;
 
-  public selectedSpell: number;
-  public spellsSelectionsItems: Array<any> = [];
-  public loading: boolean;
+  selectedSpell: number;
+  spellsSelectionsItems: Array<any> = [];
+  loading: boolean;
 
-  public get hasChampionSelected(): boolean {
+  get hasChampionSelected(): boolean {
     return this.championSelected?.name !== undefined;
   }
 
-  constructor(public dialogService: DialogService,
-    private requestService: RequestService,
-    private spellListService: SpellListService,
-  ) {
+  constructor() {
     this.championsSelectResult = new ChampionSelect();
     this.listGeneralSpells = new SpellList()
     this.spellsList = new Array<SpellList>()
@@ -50,7 +50,7 @@ export class CreateChampionComponent implements OnInit {
     this.setSpellsSelections();
   }
 
-  private setSpellsSelections(): void {
+  private setSpellsSelections() {
     const spellsList = getSpellsList()
     this.spellsSelectionsItems = spellsList
       .map(element => { return { active: false, label: element[1], key: element[0], image: '' } })
@@ -58,7 +58,7 @@ export class CreateChampionComponent implements OnInit {
     // this.spellsSelectionsItems[0].active = true;
   }
 
-  public selectSpell(spellActive: number): void {
+  selectSpell(spellActive: number) {
     this.selectedSpell = spellActive;
 
     this.spellListService.spell = spellActive;
@@ -72,11 +72,11 @@ export class CreateChampionComponent implements OnInit {
     this.listGeneralSpells = this.spellsList[spellActive];
   }
 
-  public setHability(event: SpellSelect): void {
+  setHability(event: SpellSelect) {
     this.championsSelectResult.spells[this.selectedSpell] = event;
   }
 
-  public showChampionList() {
+  showChampionList() {
     const ref = this.dialogService.open(ChampionListComponent, {
       width: '100%',
       height: '100%',

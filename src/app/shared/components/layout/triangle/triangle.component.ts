@@ -11,5 +11,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./triangle.component.scss']
 })
 export class TriangleComponent {
-  @Input() public type: string;
+  @Input() type: string;
 }

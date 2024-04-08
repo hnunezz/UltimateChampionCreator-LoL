@@ -1,5 +1,5 @@
 import { ChampionSelect } from 'src/app/shared/models/champion-select';
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild, inject } from '@angular/core';
 import html2canvas from 'html2canvas';
 import { Champion } from 'src/app/shared/models/champion.model';
 
@@ -9,21 +9,20 @@ import { Champion } from 'src/app/shared/models/champion.model';
   styleUrls: ['./share-champion.component.scss']
 })
 export class ShareChampionComponent {
-  @Input() public champion: Champion;
-  @Input() public championsSelectResult: ChampionSelect;
+  @Input() champion: Champion;
+  @Input() championsSelectResult: ChampionSelect;
 
-  public get hasChampion(): boolean {
+  private el = inject(ElementRef);
+
+  get hasChampion(): boolean {
     return this.champion?.name !== undefined;
   }
-  public get disableButton(): boolean {
+  get disableButton(): boolean {
     return (this.championsSelectResult.spells.filter(x => x.selected == true).length === 5)
       && this.hasChampion;
   }
 
-  constructor(private el: ElementRef) { }
-
-  public share(): void {
-
+  share() {
     console.log(this.champion)
     html2canvas(this.el.nativeElement.querySelector("#capture")).then(async canvas => {
       const link = canvas.toDataURL("image/png");

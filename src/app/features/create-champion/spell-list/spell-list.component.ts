@@ -1,13 +1,13 @@
 import { Champion } from './../../../shared/models/champion.model';
 
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { VirtualScroller } from 'primeng/virtualscroller';
 import { getSpellsList } from 'src/app/shared/enums/spells';
 import { SpellList, SpellSelect } from 'src/app/shared/models/spell-select';
+import { CacheService } from 'src/app/shared/services/cache-service.service';
 import { FilterService } from 'src/app/shared/services/filter-service.service';
 import { ChampionListService } from '../champion-list/services/champion-list.service';
 import { SpellListService } from './services/spell-list.service';
-import { CacheService } from 'src/app/shared/services/cache-service.service';
 
 @Component({
   selector: 'app-spell-list',
@@ -17,22 +17,18 @@ import { CacheService } from 'src/app/shared/services/cache-service.service';
 export class SpellListComponent implements OnInit {
   @ViewChild(VirtualScroller) el: VirtualScroller;
 
-  @Output() public emitSelectedSpell: EventEmitter<SpellSelect> = new EventEmitter<SpellSelect>();
+  @Output() emitSelectedSpell: EventEmitter<SpellSelect> = new EventEmitter<SpellSelect>();
 
-  public listGeneralSpells: SpellList[] = []
-  public selectedSpell: number;
+  private filterService = inject(FilterService);
+  private championList = inject(ChampionListService);
+  private spellListService = inject(SpellListService);
+  private cacheService = inject(CacheService);
 
-  public hasData: boolean = false;
   private STORAGE_KEY = 'spells';
 
-  constructor(
-    private filterService: FilterService,
-    private championList: ChampionListService,
-    private changeDetector: ChangeDetectorRef,
-    private spellListService: SpellListService,
-    private cacheService: CacheService) {
-  }
-
+  listGeneralSpells: SpellList[] = []
+  selectedSpell: number;
+  hasData: boolean = false;
 
   ngOnInit() {
     this.hasData = false;
@@ -55,7 +51,7 @@ export class SpellListComponent implements OnInit {
     this.listGeneralSpells[this.selectedSpell].spells = this.filterService.filterSpell(event, this.STORAGE_KEY, this.selectedSpell);
   }
 
-  private getSpells() {
+  private async getSpells() {
     const spellsList = getSpellsList();
     const result: SpellList[] = [];
 
@@ -63,27 +59,28 @@ export class SpellListComponent implements OnInit {
       const [type, typeLabel] = spellsList[i];
       const spells: SpellSelect[] = [];
 
-      this.championList.champions$
-        .subscribe((champ$: Champion[]) => {
-          champ$.forEach(champ => {
-            const spellIndex = type - 1;
-            const spell = spellIndex === -1 ? champ.passive : champ.spells[spellIndex];
+      const result$ = await this.championList.champions$;
 
-            spells.push({
-              champion: champ.name,
-              description: spell.description,
-              title: spell.name,
-              image: spellIndex === -1 ? champ.passive.image.full : champ.spells[spellIndex].image.full,
-              selected: false,
-              hovered: false,
-            });
-          })
+      result$.subscribe((champ$: Champion[]) => {
+        champ$.forEach(champ => {
+          const spellIndex = type - 1;
+          const spell = spellIndex === -1 ? champ.passive : champ.spells[spellIndex];
+
+          spells.push({
+            champion: champ.name,
+            description: spell.description,
+            title: spell.name,
+            image: spellIndex === -1 ? champ.passive.image.full : champ.spells[spellIndex].image.full,
+            selected: false,
+            hovered: false,
+          });
         })
+      })
+
       result.push({ type, typeLabel, spells });
     }
 
     this.cacheService.set(this.STORAGE_KEY, JSON.stringify(result));
     this.listGeneralSpells = result;
-
   }
 }

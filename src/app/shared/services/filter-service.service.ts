@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CacheService } from './cache-service.service';
 import { Champion } from '../models/champion.model';
 import { SpellList, SpellSelect } from '../models/spell-select';
@@ -7,10 +7,9 @@ import { SpellList, SpellSelect } from '../models/spell-select';
   providedIn: 'root'
 })
 export class FilterService {
+  private cacheService = inject(CacheService);
 
-  constructor(private cacheService: CacheService) { }
-
-  public filterChampion(value: string): Champion[] {
+  filterChampion(value: string): Champion[] {
     let result = [];
     const champs = JSON.parse(this.cacheService.get('championsSelection') as string) as Champion[];
 
@@ -25,7 +24,7 @@ export class FilterService {
     return result;
   }
 
-  public filterSpell(value: string, cache: string, selected: number): SpellSelect[] {
+  filterSpell(value: string, cache: string, selected: number): SpellSelect[] {
     let result = [];
     const spells = JSON.parse(this.cacheService.get(cache) as string) as SpellList[];
 

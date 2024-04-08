@@ -7,8 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SpellListService {
   private spellSubject = new BehaviorSubject<number | null>(null);
 
-  constructor() { }
-
   get spell$(): Observable<number | null> {
     return this.spellSubject.asObservable();
   }

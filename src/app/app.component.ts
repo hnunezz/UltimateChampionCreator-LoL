@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RequestService } from './shared/services/request.service';
 import { CacheService } from './shared/services/cache-service.service';
 
@@ -8,12 +8,12 @@ import { CacheService } from './shared/services/cache-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  private requestService = inject(RequestService);
+  private cacheService = inject(CacheService);
+
   title = 'Ultimate Champion Creator';
 
-  constructor(private requestService: RequestService,
-    private cacheService: CacheService) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     const storage_api_version = this.cacheService.get('api_version')
     if (!storage_api_version) {
       this.requestService.getVersion();

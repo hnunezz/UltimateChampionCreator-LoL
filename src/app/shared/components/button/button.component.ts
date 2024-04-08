@@ -12,7 +12,7 @@ export class ButtonComponent {
   @Input() disable: boolean = false;
   @Output() onClick = new EventEmitter();
 
-  public onClickEmitter(): void {
+  onClickEmitter() {
     if (!this.disable) { this.onClick.emit(); }
   }
 }

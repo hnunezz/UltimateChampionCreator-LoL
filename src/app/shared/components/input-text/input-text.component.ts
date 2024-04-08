@@ -13,7 +13,7 @@ export class InputTextComponent {
 
   @Output() modelChange: EventEmitter<string> = new EventEmitter<string>();
 
-  validateKey(e: KeyboardEvent): void {
+  validateKey(e: KeyboardEvent) {
     if (this.type.startsWith('t')) {
       if (e.keyCode > 47 && e.keyCode < 58) { e.preventDefault(); }
     } else {

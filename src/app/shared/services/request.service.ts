@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { ChampionListService } from 'src/app/features/create-champion/champion-list/services/champion-list.service';
 import { _url, _urlApiVersion } from 'src/assets/enviroment';
@@ -13,9 +13,9 @@ import { all_champions } from 'src/assets/data/all-champions';
   providedIn: 'root'
 })
 export class RequestService {
-  constructor(private http: HttpClient,
-    private championList: ChampionListService,
-    private cacheService: CacheService) { }
+  private http = inject(HttpClient);
+  private championList = inject(ChampionListService);
+  private cacheService = inject(CacheService);
 
   getChampions() {
     if (!this.cacheService.get('api_version')) {
